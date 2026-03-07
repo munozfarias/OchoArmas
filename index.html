@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OCHO ARMAS — Shorts de Muay Thai</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;1,700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black:   #080808;
+    --dark:    #111111;
+    --card:    #161616;
+    --border:  #1e1e1e;
+    --yellow:  #f0c519;
+    --yellow2: #d4a800;
+    --red:     #c0272d;
+    --white:   #f5f0e8;
+    --gray:    #666;
+    --gray2:   #444;
+  }
+
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── GRAIN ── */
+  body::after {
+    content:'';
+    position:fixed; inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    background-size:256px;
+    pointer-events:none;
+    z-index:9000;
+    mix-blend-mode: overlay;
+    opacity:.55;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:500;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:18px 48px;
+    background:linear-gradient(to bottom,rgba(8,8,8,.97) 0%,transparent 100%);
+    backdrop-filter: blur(2px);
+  }
+
+  .nav-logo {
+    display:flex; align-items:center; gap:10px;
+    text-decoration:none;
+  }
+
+  .nav-logo-icon {
+    width:42px; height:42px;
+    background: var(--yellow);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Bebas Neue',sans-serif;
+    font-size:13px;
+    color:var(--black);
+    letter-spacing:1px;
+    line-height:1;
+    text-align:center;
+    padding:4px;
+    box-shadow: 0 0 0 2px var(--yellow2);
+  }
+
+  .nav-logo-text {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:22px;
+    letter-spacing:4px;
+    color:var(--white);
+  }
+
+  .nav-logo-text span { color:var(--yellow); }
+
+  nav ul { list-style:none; display:flex; gap:32px; }
+
+  nav ul a {
+    color:var(--gray);
+    text-decoration:none;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:12px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    transition:color .2s;
+  }
+
+  nav ul a:hover { color:var(--yellow); }
+
+  .nav-wa {
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--yellow);
+    color:var(--black) !important;
+    padding:10px 20px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:12px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    font-weight:800;
+    text-decoration:none;
+    transition: background .2s, transform .15s;
+    clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,0 100%);
+  }
+  .nav-wa:hover { background:var(--yellow2); transform:translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height:100vh;
+    display:flex; align-items:center;
+    position:relative; overflow:hidden;
+    padding:140px 48px 80px;
+  }
+
+  /* big diagonal grid lines */
+  .hero::before {
+    content:'';
+    position:absolute; inset:0;
+    background:
+      repeating-linear-gradient(-52deg,transparent,transparent 60px,rgba(240,197,25,.028) 60px,rgba(240,197,25,.028) 61px);
+    pointer-events:none;
+  }
+
+  .hero-glow {
+    position:absolute;
+    width:700px; height:700px;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(240,197,25,.07) 0%,transparent 70%);
+    top:50%; left:55%;
+    transform:translate(-50%,-50%);
+    pointer-events:none;
+  }
+
+  .hero-content {
+    position:relative; z-index:2;
+    max-width:660px;
+  }
+
+  .eyebrow {
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:11px; letter-spacing:5px; text-transform:uppercase;
+    color:var(--yellow);
+    margin-bottom:24px;
+  }
+  .eyebrow::before {
+    content:''; display:block;
+    width:28px; height:1px; background:var(--yellow);
+  }
+
+  h1 {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:clamp(80px,11vw,160px);
+    line-height:.88;
+    letter-spacing:3px;
+    margin-bottom:32px;
+  }
+
+  h1 .line-yellow { color:var(--yellow); display:block; }
+  h1 .line-outline {
+    -webkit-text-stroke: 1.5px var(--white);
+    color:transparent;
+    display:block;
+  }
+
+  .hero-desc {
+    font-size:16px; color:var(--gray);
+    line-height:1.75; max-width:400px;
+    margin-bottom:48px;
+  }
+
+  .hero-actions { display:flex; gap:14px; flex-wrap:wrap; }
+
+  /* ── BUTTONS ── */
+  .btn-yellow {
+    display:inline-flex; align-items:center; gap:10px;
+    background:var(--yellow); color:var(--black);
+    padding:16px 30px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:14px; letter-spacing:3px;
+    text-transform:uppercase; font-weight:800;
+    text-decoration:none;
+    transition:all .2s;
+    clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%);
+  }
+  .btn-yellow:hover { background:var(--yellow2); transform:translateY(-2px); box-shadow:0 10px 32px rgba(240,197,25,.25); }
+
+  .btn-ghost {
+    display:inline-flex; align-items:center; gap:10px;
+    border:1px solid var(--border);
+    color:var(--gray);
+    padding:16px 30px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:14px; letter-spacing:3px;
+    text-transform:uppercase; font-weight:600;
+    text-decoration:none;
+    transition:all .2s;
+  }
+  .btn-ghost:hover { border-color:var(--yellow); color:var(--yellow); }
+
+  /* ── MARQUEE ── */
+  .marquee-wrap {
+    overflow:hidden;
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+    padding:14px 0;
+    background:var(--dark);
+  }
+  .marquee-track {
+    display:flex; gap:0;
+    animation: marquee 22s linear infinite;
+    width:max-content;
+  }
+  .marquee-item {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:14px; letter-spacing:4px;
+    padding:0 32px;
+    white-space:nowrap;
+    color:var(--gray2);
+  }
+  .marquee-item.accent { color:var(--yellow); }
+
+  @keyframes marquee {
+    from { transform:translateX(0); }
+    to   { transform:translateX(-50%); }
+  }
+
+  /* ── STATS ── */
+  .stats {
+    display:grid; grid-template-columns:repeat(4,1fr);
+    border-bottom:1px solid var(--border);
+  }
+  .stat {
+    padding:36px 48px;
+    border-right:1px solid var(--border);
+    position:relative; overflow:hidden;
+  }
+  .stat:last-child { border-right:none; }
+  .stat::after {
+    content:'';
+    position:absolute; top:0; left:0;
+    width:3px; height:0;
+    background:var(--yellow);
+    transition: height .6s ease;
+  }
+  .stat.visible::after { height:100%; }
+
+  .stat-num {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:52px; color:var(--yellow);
+    line-height:1; letter-spacing:2px;
+  }
+  .stat-label {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:11px; letter-spacing:3px;
+    text-transform:uppercase; color:var(--gray);
+    margin-top:4px;
+  }
+
+  /* ── PRODUCTS ── */
+  #productos { padding:100px 48px; }
+
+  .section-header {
+    display:flex; justify-content:space-between; align-items:flex-end;
+    margin-bottom:56px;
+  }
+
+  .section-tag {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:11px; letter-spacing:5px;
+    text-transform:uppercase; color:var(--yellow);
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:12px;
+  }
+  .section-tag::before {
+    content:''; display:block;
+    width:22px; height:1px; background:var(--yellow);
+  }
+
+  h2 {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:clamp(44px,5.5vw,72px);
+    letter-spacing:2px; line-height:1;
+  }
+
+  /* product grid — masonry-ish with CSS grid */
+  .products-grid {
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:3px;
+  }
+
+  .product-card {
+    position:relative; overflow:hidden;
+    background:var(--card);
+    cursor:pointer;
+  }
+
+  /* featured first card spans 2 rows */
+  .product-card.featured { grid-row: span 2; }
+
+  .product-img-wrap {
+    aspect-ratio:3/4;
+    overflow:hidden;
+    background:var(--card);
+    position:relative;
+  }
+  .product-card.featured .product-img-wrap { aspect-ratio:unset; height:100%; }
+
+  /* placeholder styled like real product shots */
+  .prod-placeholder {
+    width:100%; height:100%; min-height:260px;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    gap:8px;
+    background:linear-gradient(145deg,#1a1a1a,#111);
+  }
+  .prod-placeholder .shorts-icon {
+    width:64px; height:64px;
+    opacity:.18;
+  }
+  .prod-placeholder span {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:10px; letter-spacing:2px;
+    color:#333; text-transform:uppercase;
+  }
+
+  /* colour swatches per card */
+  .swatch { display:inline-block; width:10px; height:10px; border-radius:50%; }
+
+  .product-overlay {
+    position:absolute; inset:0;
+    background:rgba(8,8,8,.82);
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    gap:12px;
+    opacity:0; transition:opacity .3s;
+  }
+  .product-card:hover .product-overlay { opacity:1; }
+  .product-card:hover .prod-img-inner { transform:scale(1.07); }
+
+  .prod-img-inner {
+    width:100%; height:100%;
+    transition:transform .5s ease;
+  }
+
+  .overlay-btn {
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--yellow); color:var(--black);
+    padding:12px 24px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:13px; letter-spacing:2px;
+    text-transform:uppercase; font-weight:800;
+    text-decoration:none;
+    transition: transform .15s;
+  }
+  .overlay-btn:hover { transform:scale(1.04); }
+
+  .product-badge {
+    position:absolute; top:14px; left:14px;
+    background:var(--yellow); color:var(--black);
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:10px; letter-spacing:2px;
+    text-transform:uppercase; font-weight:800;
+    padding:4px 10px;
+  }
+  .product-badge.custom {
+    background:transparent;
+    border:1px solid var(--yellow);
+    color:var(--yellow);
+  }
+
+  .product-info {
+    padding:16px 18px 18px;
+    background:var(--card);
+    border-top:1px solid var(--border);
+  }
+  .product-name {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:17px; font-weight:700;
+    text-transform:uppercase; letter-spacing:1px;
+    color:var(--white); margin-bottom:3px;
+  }
+  .product-meta {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:12px; letter-spacing:2px;
+    color:var(--gray); text-transform:uppercase;
+  }
+
+  /* ── CUSTOM ── */
+  #personalizado {
+    margin:0 48px;
+    border:1px solid var(--border);
+    padding:80px 64px;
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:64px; align-items:center;
+    position:relative; overflow:hidden;
+  }
+
+  #personalizado::before {
+    content:'CUSTOM';
+    position:absolute; right:-20px; top:50%;
+    transform:translateY(-50%);
+    font-family:'Bebas Neue',sans-serif;
+    font-size:200px; letter-spacing:10px;
+    color:rgba(240,197,25,.04);
+    pointer-events:none; line-height:1;
+  }
+
+  .custom-feature {
+    display:flex; align-items:flex-start; gap:16px;
+    margin-bottom:28px;
+  }
+  .custom-feature:last-child { margin-bottom:0; }
+
+  .custom-num {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:44px; color:var(--yellow);
+    line-height:1; min-width:44px;
+  }
+
+  .custom-title {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:18px; font-weight:700;
+    text-transform:uppercase; letter-spacing:1px;
+    margin-bottom:4px; color:var(--white);
+  }
+
+  .custom-desc {
+    font-size:14px; color:var(--gray); line-height:1.7;
+  }
+
+  .custom-visual {
+    position:relative;
+    display:flex; align-items:center; justify-content:center;
+  }
+
+  .custom-ring {
+    width:280px; height:280px;
+    border:1px solid var(--border);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+  }
+  .custom-ring::before {
+    content:'';
+    position:absolute; inset:-12px;
+    border:1px dashed rgba(240,197,25,.2);
+    border-radius:50%;
+    animation: spin 20s linear infinite;
+  }
+  @keyframes spin { to { transform:rotate(360deg); } }
+
+  .custom-ring-inner {
+    width:200px; height:200px;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(240,197,25,.08),transparent 70%);
+    display:flex; align-items:center; justify-content:center;
+    flex-direction:column; gap:8px;
+  }
+
+  .custom-ring-inner svg { width:56px; height:56px; color:var(--yellow); opacity:.7; }
+
+  .custom-ring-inner p {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:20px; letter-spacing:4px;
+    color:var(--yellow); opacity:.8;
+    text-align:center;
+  }
+
+  /* floating tags around ring */
+  .float-tag {
+    position:absolute;
+    background:var(--card);
+    border:1px solid var(--border);
+    padding:8px 14px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:11px; letter-spacing:2px;
+    color:var(--yellow); text-transform:uppercase;
+  }
+  .float-tag:nth-child(1) { top:10px; right:0; }
+  .float-tag:nth-child(2) { bottom:30px; left:-10px; }
+  .float-tag:nth-child(3) { top:40%; right:-20px; }
+
+  /* ── FEATURES ── */
+  #caracteristicas {
+    padding:100px 48px;
+    background:var(--dark);
+  }
+
+  .features-grid {
+    display:grid; grid-template-columns:repeat(4,1fr);
+    gap:1px; background:var(--border);
+    margin-top:56px;
+    border:1px solid var(--border);
+  }
+
+  .feature {
+    padding:40px 32px;
+    background:var(--dark);
+    transition: background .3s;
+  }
+  .feature:hover { background: #171400; }
+
+  .feature-num {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:11px; letter-spacing:4px;
+    color:var(--gray2); margin-bottom:24px;
+  }
+
+  .feature-icon-wrap {
+    width:48px; height:48px;
+    border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:20px;
+    transition: border-color .3s;
+  }
+  .feature:hover .feature-icon-wrap { border-color: var(--yellow); }
+
+  .feature-icon-wrap svg { width:22px; height:22px; color:var(--yellow); }
+
+  .feature-title {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:19px; font-weight:700;
+    text-transform:uppercase; letter-spacing:1px;
+    color:var(--white); margin-bottom:10px;
+  }
+
+  .feature-desc {
+    font-size:13.5px; color:var(--gray); line-height:1.75;
+  }
+
+  /* ── SIZES ── */
+  #tallas { padding:80px 48px; border-top:1px solid var(--border); }
+
+  .tallas-inner {
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:64px; margin-top:56px; align-items:start;
+  }
+
+  .sizes-table {
+    width:100%; border-collapse:collapse;
+    font-family:'Barlow Condensed',sans-serif;
+  }
+  .sizes-table th {
+    text-align:left; padding:14px 16px;
+    font-size:11px; letter-spacing:3px;
+    text-transform:uppercase; color:var(--gray);
+    border-bottom:1px solid var(--border);
+    background:var(--card);
+  }
+  .sizes-table td {
+    padding:14px 16px;
+    border-bottom:1px solid var(--border);
+    font-size:17px; color:var(--white);
+  }
+  .sizes-table tr:hover td { background:rgba(240,197,25,.03); }
+  .size-name { font-weight:700; color:var(--yellow) !important; }
+
+  .tallas-note {
+    background:var(--card); border:1px solid var(--border);
+    padding:28px 32px;
+  }
+  .tallas-note h3 {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:18px; font-weight:700;
+    text-transform:uppercase; letter-spacing:1px;
+    color:var(--yellow); margin-bottom:12px;
+  }
+  .tallas-note p {
+    font-size:14px; color:var(--gray); line-height:1.75;
+    margin-bottom:20px;
+  }
+
+  /* ── CTA ── */
+  #contacto {
+    padding:120px 48px;
+    text-align:center;
+    position:relative; overflow:hidden;
+  }
+  #contacto::before {
+    content:'';
+    position:absolute; inset:0;
+    background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(240,197,25,.07) 0%,transparent 70%);
+  }
+  .cta-content { position:relative; z-index:1; max-width:580px; margin:0 auto; }
+  .cta-content h2 { margin-bottom:14px; }
+  .cta-content p { color:var(--gray); font-size:17px; line-height:1.7; margin-bottom:48px; }
+
+  .cta-buttons { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+
+  .btn-wa {
+    display:inline-flex; align-items:center; gap:10px;
+    background:#25D366; color:#fff;
+    padding:18px 34px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:15px; letter-spacing:3px;
+    text-transform:uppercase; font-weight:700;
+    text-decoration:none;
+    clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%);
+    transition:all .2s;
+  }
+  .btn-wa:hover { background:#1fbd5a; transform:translateY(-2px); box-shadow:0 12px 32px rgba(37,211,102,.3); }
+
+  .btn-ig {
+    display:inline-flex; align-items:center; gap:10px;
+    background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);
+    color:#fff;
+    padding:18px 34px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:15px; letter-spacing:3px;
+    text-transform:uppercase; font-weight:700;
+    text-decoration:none;
+    clip-path:polygon(10px 0,100% 0,100% 100%,0 100%,0 10px);
+    transition:all .2s;
+  }
+  .btn-ig:hover { transform:translateY(-2px); box-shadow:0 12px 32px rgba(253,29,29,.3); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top:1px solid var(--border);
+    padding:36px 48px;
+    display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:20px;
+  }
+  .footer-logo {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:20px; letter-spacing:4px; color:var(--white);
+  }
+  .footer-logo span { color:var(--yellow); }
+
+  footer p {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:12px; letter-spacing:2px;
+    color:var(--gray2); text-transform:uppercase;
+  }
+
+  .footer-links { display:flex; gap:24px; }
+  .footer-links a {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:12px; letter-spacing:2px;
+    color:var(--gray2); text-transform:uppercase;
+    text-decoration:none; transition:color .2s;
+  }
+  .footer-links a:hover { color:var(--yellow); }
+
+  /* ── REVEAL ── */
+  .reveal {
+    opacity:0; transform:translateY(36px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+
+  /* ── ICONS ── */
+  .icon-wa { width:20px; height:20px; fill:currentColor; flex-shrink:0; }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:1024px) {
+    .products-grid { grid-template-columns:repeat(3,1fr); }
+    .product-card.featured { grid-row:span 1; }
+    .features-grid { grid-template-columns:repeat(2,1fr); }
+    .stats { grid-template-columns:repeat(2,1fr); }
+    #personalizado { grid-template-columns:1fr; }
+    .tallas-inner { grid-template-columns:1fr; }
+  }
+
+  @media(max-width:768px) {
+    nav { padding:16px 20px; }
+    nav ul { display:none; }
+    .hero { padding:120px 20px 60px; }
+    h1 { font-size:72px; }
+    .hero-glow { display:none; }
+    .products-grid { grid-template-columns:repeat(2,1fr); }
+    #productos,#caracteristicas,#tallas,#contacto { padding:60px 20px; }
+    #personalizado { margin:0 20px; padding:48px 24px; }
+    .features-grid { grid-template-columns:1fr; }
+    .stats { grid-template-columns:repeat(2,1fr); }
+    .stat { padding:24px; }
+    footer { padding:28px 20px; flex-direction:column; align-items:flex-start; }
+    .section-header { flex-direction:column; align-items:flex-start; gap:20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">OCHO<br>ARMAS</div>
+    <span class="nav-logo-text">OCHO<span>ARMAS</span></span>
+  </a>
+  <ul>
+    <li><a href="#productos">Shorts</a></li>
+    <li><a href="#personalizado">Personalizados</a></li>
+    <li><a href="#tallas">Tallas</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="https://wa.me/56900000000?text=Hola!%20Vi%20la%20web%20de%20Ocho%20Armas%20y%20quiero%20pedir%20un%20short" class="nav-wa" target="_blank">
+    <svg class="icon-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Pedir Ahora
+  </a>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="eyebrow">Santiago, Chile — Envíos a todo el mundo</div>
+    <h1>
+      <span class="line-yellow">OCHO</span>
+      <span class="line-outline">ARMAS</span>
+      MUAY THAI
+    </h1>
+    <p class="hero-desc">
+      Shorts de Muay Thai con diseños bordados personalizados. Confeccionados para el ring, hechos para durar. Tu nombre, tu estilo, tu pelea.
+    </p>
+    <div class="hero-actions">
+      <a href="https://wa.me/56900000000?text=Hola!%20Quiero%20pedir%20un%20short%20de%20Ocho%20Armas" class="btn-yellow" target="_blank">
+        <svg class="icon-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Pedir por WhatsApp
+      </a>
+      <a href="#productos" class="btn-ghost">Ver Catálogo ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MARQUEE ══ -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item accent">OCHO ARMAS</span>
+    <span class="marquee-item">MUAY THAI</span>
+    <span class="marquee-item accent">DISEÑO BORDADO</span>
+    <span class="marquee-item">SANTIAGO CL</span>
+    <span class="marquee-item accent">PERSONALIZADO</span>
+    <span class="marquee-item">ENVÍOS MUNDIALES</span>
+    <span class="marquee-item accent">OCHO ARMAS</span>
+    <span class="marquee-item">MUAY THAI</span>
+    <span class="marquee-item accent">DISEÑO BORDADO</span>
+    <span class="marquee-item">SANTIAGO CL</span>
+    <span class="marquee-item accent">PERSONALIZADO</span>
+    <span class="marquee-item">ENVÍOS MUNDIALES</span>
+    <!-- repeat for seamless loop -->
+    <span class="marquee-item accent">OCHO ARMAS</span>
+    <span class="marquee-item">MUAY THAI</span>
+    <span class="marquee-item accent">DISEÑO BORDADO</span>
+    <span class="marquee-item">SANTIAGO CL</span>
+    <span class="marquee-item accent">PERSONALIZADO</span>
+    <span class="marquee-item">ENVÍOS MUNDIALES</span>
+    <span class="marquee-item accent">OCHO ARMAS</span>
+    <span class="marquee-item">MUAY THAI</span>
+    <span class="marquee-item accent">DISEÑO BORDADO</span>
+    <span class="marquee-item">SANTIAGO CL</span>
+    <span class="marquee-item accent">PERSONALIZADO</span>
+    <span class="marquee-item">ENVÍOS MUNDIALES</span>
+  </div>
+</div>
+
+<!-- ══ STATS ══ -->
+<div class="stats">
+  <div class="stat reveal">
+    <div class="stat-num">64+</div>
+    <div class="stat-label">Diseños publicados</div>
+  </div>
+  <div class="stat reveal">
+    <div class="stat-num">100%</div>
+    <div class="stat-label">Bordado personalizado</div>
+  </div>
+  <div class="stat reveal">
+    <div class="stat-num">🌎</div>
+    <div class="stat-label">Envíos internacionales</div>
+  </div>
+  <div class="stat reveal">
+    <div class="stat-num">24H</div>
+    <div class="stat-label">Respuesta por WhatsApp</div>
+  </div>
+</div>
+
+<!-- ══ PRODUCTOS ══ -->
+<section id="productos">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-tag">Catálogo</div>
+      <h2>NUESTROS SHORTS</h2>
+    </div>
+    <a href="https://wa.me/56900000000?text=Quiero%20ver%20el%20cat%C3%A1logo%20completo%20de%20Ocho%20Armas" class="btn-ghost" target="_blank">Ver catálogo completo →</a>
+  </div>
+
+  <div class="products-grid">
+
+    <!-- Card 1 — featured -->
+    <div class="product-card featured reveal">
+      <div class="product-img-wrap">
+        <div class="prod-placeholder" style="background:linear-gradient(145deg,#1a0a0a,#0d0505);">
+          <svg class="shorts-icon" viewBox="0 0 80 80" fill="none">
+            <rect x="10" y="20" width="60" height="50" rx="4" fill="#c0272d" opacity=".6"/>
+            <rect x="10" y="20" width="60" height="14" rx="4" fill="#8a0000" opacity=".8"/>
+            <line x1="40" y1="34" x2="40" y2="70" stroke="#ff6666" stroke-width="2" opacity=".4"/>
+          </svg>
+          <span>Foto producto</span>
+        </div>
+      </div>
+      <div class="product-overlay">
+        <a href="https://wa.me/56900000000?text=Me%20interesa%20el%20short%20Rojo%20Bordado" class="overlay-btn" target="_blank">
+          <svg class="icon-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Consultar precio
+        </a>
+      </div>
+      <span class="product-badge">Destacado</span>
+      <div class="product-info">
+        <div class="product-name">Chillattai Rojo</div>
+        <div class="product-meta">Bordado · Satin Premium · S–XL</div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="product-card reveal">
+      <div class="product-img-wrap">
+        <div class="prod-placeholder" style="background:linear-gradient(145deg,#0a0a1a,#060610);">
+          <svg class="shorts-icon" viewBox="0 0 80 80" fill="none">
+            <rect x="10" y="20" width="60" height="50" rx="4" fill="#1a1a3a" opacity=".9"/>
+            <rect x="10" y="20" width="60" height="14" rx="4" fill="#0a0a22" opacity=".9"/>
+            <line x1="40" y1="34" x2="40" y2="70" stroke="#4444aa" stroke-width="2" opacity=".5"/>
+          </svg>
+          <span>Foto producto</span>
+        </div>
+      </div>
+      <div class="product-overlay">
+        <a href="https://wa.me/56900000000?text=Me%20interesa%20el%20short%20Muay%20Thai%20Azul" class="overlay-btn" target="_blank">
+          <svg class="icon-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Consultar precio
+        </a>
+      </div>
+      <div class="product-info">
+        <div class="product-name">มวยไทย Azul</div>
+        <div class="product-meta">Bordado · Satin · S–XL</div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="product-card reveal">
+      <div class="product-img-wrap">
+        <div class="prod-placeholder" style="background:linear-gradient(145deg,#1a0d1a,#100810);">
+          <svg class="shorts-icon" viewBox="0 0 80 80" fill="none">
+            <rect x="10" y="20" width="60" height="50" rx="4" fill="#5a1a7a" opacity=".7"/>
+            <rect x="10" y="20" width="60" height="14" rx="4" fill="#3a0a5a" opacity=".9"/>
+            <line x1="40" y1="34" x2="40" y2="70" stroke="#cc66ff" stroke-width="2" opacity=".4"/>
+          </svg>
+          <span>Foto producto</span>
+        </div>
+      </div>
+      <div class="product-overlay">
+        <a href="https://wa.me/56900000000?text=Me%20interesa%20el%20short%20Leopardo%20Morado" class="overlay-btn" target="_blank">
+          <svg class="icon-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Consultar precio
+        </a>
+      </div>
+      <span class="product-badge">Popular</span>
+      <div class="product-info">
+        <div class="product-name">Leopardo Morado</div>
+        <div class="product-meta">Bordado · Satin · S–XL</div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="product-card reveal">
+      <div class="product-img-wrap">
+        <div class="prod-placeholder" style="background:linear-gradient(145deg,#0a0a0a,#141414);">
+          <svg class="shorts-icon" viewBox="0 0 80 80" fill="none">
+            <rect x="10" y="20" width="60" height="50" rx="4" fill="#1a1a1a" opacity=".9"/>
+            <rect x="10" y="20" width="60" height="14" rx="4" fill="#0a0a0a" opacity=".9"/>
+            <line x1="40" y1="34" x2="40" y2="70" stroke="#f0c519" stroke-width="2" opacity=".6"/>
+          </svg>
+          <span>Foto producto</span>
+        </div>
+      </div>
+      <div class="product-overlay">
+        <a href="https://wa.me/56900000000?text=Me%20interesa%20el%20short%20Negro%20Dorado" class="overlay-btn" target="_blank">
+          <svg class="icon-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Consultar precio
+        </a>
+      </div>
+      <div class="product-info">
+        <div class="product-name">Ocho Armas Negro</div>
+        <div class="product-meta">Bordado Dorado · Satin · S–XL</div>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="product-card reveal">
+      <div class="product-img-wrap">
+        <div class="prod-placeholder" style="background:linear-gradient(145deg,#1a1008,#100c04);">
+          <svg class="shorts-icon" viewBox="0 0 80 80" fill="none">
+            <rect x="10" y="20" width="60" height="50" rx="4" fill="#cc3300" opacity=".6"/>
+            <rect x="10" y="20" width="60" height="14" rx="4" fill="#881100" opacity=".8"/>
+            <line x1="40" y1="34" x2="40" y2="70" stroke="#ffaa44" stroke-width="2" opacity=".5"/>
+          </svg>
+          <span>Foto producto</span>
+        </div>
+      </div>
+      <div class="product-overlay">
+        <a href="https://wa.me/56900000000?text=Me%20interesa%20el%20short%20Vendetta" class="overlay-btn" target="_blank">
+          <svg class="icon-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Consultar precio
+        </a>
+      </div>
+      <span class="product-badge custom">Custom</span>
+      <div class="product-info">
+        <div class="product-name">Vendetta</div>
+        <div class="product-meta">Personalizado · Bordado · S–XL</div>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="product-card reveal">
+      <div class="product-img-wrap">
+        <div class="prod-placeholder" style="background:linear-gradient(145deg,#101a10,#080e08);">
+          <svg class="shorts-icon" viewBox="0 0 80 80" fill="none">
+            <rect x="10" y="20" width="60" height="50" rx="4" fill="#1a5a1a" opacity=".7"/>
+            <rect x="10" y="20" width="60" height="14" rx="4" fill="#0a3a0a" opacity=".9"/>
+            <line x1="40" y1="34" x2="40" y2="70" stroke="#88ee88" stroke-width="2" opacity=".4"/>
+          </svg>
+          <span>Foto producto</span>
+        </div>
+      </div>
+      <div class="product-overlay">
+        <a href="https://wa.me/56900000000?text=Me%20interesa%20el%20short%20Chelo%20Verde" class="overlay-btn" target="_blank">
+          <svg class="icon-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Consultar precio
+        </a>
+      </div>
+      <span class="product-badge custom">Custom</span>
+      <div class="product-info">
+        <div class="product-name">Chelo Verde</div>
+        <div class="product-meta">Personalizado · Bordado · S–XL</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ PERSONALIZADO ══ -->
+<section id="personalizado">
+  <div class="section-tag reveal">Lo que nos hace únicos</div>
+  <h2 class="reveal">DISEÑO<br>100% TUYO</h2>
+
+  <div style="height:48px"></div>
+
+  <div id="personalizado" style="padding:80px 64px; border:1px solid var(--border); margin:0; display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; position:relative; overflow:hidden; background:var(--dark);">
+    <div style="position:absolute;right:-20px;top:50%;transform:translateY(-50%);font-family:'Bebas Neue',sans-serif;font-size:200px;letter-spacing:10px;color:rgba(240,197,25,.03);pointer-events:none;line-height:1;">CUSTOM</div>
+
+    <div class="reveal">
+      <div class="custom-feature">
+        <div class="custom-num">01</div>
+        <div>
+          <div class="custom-title">Tu nombre en el ring</div>
+          <div class="custom-desc">Bordamos cualquier nombre, apodo o texto que quieras en tu short. Fuentes personalizadas, colores a elección.</div>
+        </div>
+      </div>
+      <div class="custom-feature">
+        <div class="custom-num">02</div>
+        <div>
+          <div class="custom-title">Colores sin límite</div>
+          <div class="custom-desc">Elige el color de tela, el hilo del bordado, el elástico. Combinaciones únicas que no encontrarás en otro lado.</div>
+        </div>
+      </div>
+      <div class="custom-feature">
+        <div class="custom-num">03</div>
+        <div>
+          <div class="custom-title">Para equipos y academias</div>
+          <div class="custom-desc">Confeccionamos shorts para grupos completos con logo del gym, diseño único, identidad visual para el equipo.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="custom-visual reveal" style="display:flex;align-items:center;justify-content:center;position:relative;">
+      <span class="float-tag">Bordado artesanal</span>
+      <span class="float-tag">Tu logo</span>
+      <span class="float-tag">Colores custom</span>
+      <div class="custom-ring">
+        <div class="custom-ring-inner">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          <p>HECHO<br>A MEDIDA</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CARACTERÍSTICAS ══ -->
+<section id="caracteristicas">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-tag">Por qué elegirnos</div>
+      <h2>CALIDAD SIN<br>COMPROMISO</h2>
+    </div>
+  </div>
+
+  <div class="features-grid">
+    <div class="feature reveal">
+      <div class="feature-num">01</div>
+      <div class="feature-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="feature-title">Satin Premium</div>
+      <div class="feature-desc">Tela de alta densidad, la misma que usan los luchadores profesionales en Thailand. Resistente, liviana y con caída perfecta.</div>
+    </div>
+
+    <div class="feature reveal">
+      <div class="feature-num">02</div>
+      <div class="feature-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      </div>
+      <div class="feature-title">Bordado artesanal</div>
+      <div class="feature-desc">Cada short es bordado a mano. Los diseños son duraderos, no se descascaran ni destiñen con el uso y los lavados.</div>
+    </div>
+
+    <div class="feature reveal">
+      <div class="feature-num">03</div>
+      <div class="feature-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+      <div class="feature-title">Santiago, Chile</div>
+      <div class="feature-desc">Producción local con control de calidad directo. Enviamos a todo Chile y al mundo. Seguimiento de tu pedido en tiempo real.</div>
+    </div>
+
+    <div class="feature reveal">
+      <div class="feature-num">04</div>
+      <div class="feature-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+      </div>
+      <div class="feature-title">Diseños únicos</div>
+      <div class="feature-desc">Inspirados en la cultura del Muay Thai y la calle latinoamericana. Cada modelo es exclusivo de Ocho Armas.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TALLAS ══ -->
+<section id="tallas">
+  <div class="section-tag reveal">Guía de tallas</div>
+  <h2 class="reveal">ENCUENTRA<br>TU TALLA</h2>
+
+  <div class="tallas-inner">
+    <table class="sizes-table reveal">
+      <thead>
+        <tr>
+          <th>Talla</th>
+          <th>Cintura (cm)</th>
+          <th>Cadera (cm)</th>
+          <th>Largo (cm)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="size-name">S</td><td>70–76</td><td>88–94</td><td>38</td></tr>
+        <tr><td class="size-name">M</td><td>78–84</td><td>96–102</td><td>40</td></tr>
+        <tr><td class="size-name">L</td><td>86–92</td><td>104–110</td><td>42</td></tr>
+        <tr><td class="size-name">XL</td><td>94–102</td><td>112–118</td><td>44</td></tr>
+      </tbody>
+    </table>
+
+    <div class="tallas-note reveal">
+      <h3>¿Dudas con tu talla?</h3>
+      <p>Los shorts de Muay Thai tienen un corte más amplio en las caderas para permitir máxima movilidad en patadas y clínch. Si estás entre dos tallas, te recomendamos ir a la más grande.</p>
+      <p>También puedes escribirnos con tus medidas y te asesoramos directamente.</p>
+      <a href="https://wa.me/56900000000?text=Hola!%20Necesito%20ayuda%20para%20elegir%20mi%20talla%20de%20short" class="btn-yellow" target="_blank" style="font-size:13px;">
+        <svg class="icon-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Asesoría de talla gratis
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section id="contacto">
+  <div class="cta-content">
+    <div class="section-tag reveal" style="justify-content:center;">Habla con nosotros</div>
+    <h2 class="reveal">¿LISTO PARA<br><span style="color:var(--yellow)">PELEAR?</span></h2>
+    <p class="reveal">Escríbenos por WhatsApp o visita nuestro Instagram. Respondemos rápido, cotizamos gratis y te guiamos en tu pedido.</p>
+    <div class="cta-buttons reveal">
+      <a href="https://wa.me/56900000000?text=Hola!%20Vi%20la%20web%20de%20Ocho%20Armas%20y%20quiero%20pedir%20un%20short" class="btn-wa" target="_blank">
+        <svg class="icon-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+      <a href="https://instagram.com/ochoarmas" class="btn-ig" target="_blank">
+        <svg style="width:20px;height:20px;fill:white;flex-shrink:0" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        @ochoarmas
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-logo">OCHO<span>ARMAS</span></div>
+  <div class="footer-links">
+    <a href="#productos">Shorts</a>
+    <a href="#personalizado">Personalizados</a>
+    <a href="#tallas">Tallas</a>
+    <a href="https://instagram.com/ochoarmas" target="_blank">Instagram</a>
+  </div>
+  <p>Santiago, Chile 🇨🇱 — Envíos mundiales</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        const delay = (i % 4) * 90;
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+          // also trigger stat bar animation
+          if (entry.target.classList.contains('stat')) {
+            entry.target.classList.add('visible');
+          }
+        }, delay);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+  document.querySelectorAll('.reveal, .stat').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
