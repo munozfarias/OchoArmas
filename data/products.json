@@ -16,8 +16,16 @@
       "badge": "Destacado",
       "badge_class": "",
       "price": 29990,
-      "stock": 8,
-      "tags": ["bordado", "destacado"],
+      "stock": {
+        "S": 2,
+        "M": 2,
+        "L": 2,
+        "XL": 2
+      },
+      "tags": [
+        "bordado",
+        "destacado"
+      ],
       "images": {
         "placeholder_bg": "linear-gradient(145deg,#1a0a0a,#0d0505)",
         "icon_fill": "#c0272d",
@@ -30,8 +38,17 @@
           "images/products/chillattai-rojo-espalda.jpg"
         ]
       },
-      "colors": ["#c0272d", "#8a0000", "#ff4444"],
-      "sizes": ["S", "M", "L", "XL"],
+      "colors": [
+        "#c0272d",
+        "#8a0000",
+        "#ff4444"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
       "material": "Satin Premium de alta densidad",
       "description": "Short de Muay Thai confeccionado en Satin Premium de alta densidad. Diseño bordado artesanalmente con inspiración en la cultura Chillattai. Corte amplio en caderas para máxima movilidad en patadas y clínch.",
       "meta": "Bordado · Satin Premium · S–XL",
@@ -47,8 +64,15 @@
       "badge": "",
       "badge_class": "",
       "price": 24990,
-      "stock": 12,
-      "tags": ["bordado"],
+      "stock": {
+        "S": 3,
+        "M": 3,
+        "L": 3,
+        "XL": 3
+      },
+      "tags": [
+        "bordado"
+      ],
       "images": {
         "placeholder_bg": "linear-gradient(145deg,#0a0a1a,#060610)",
         "icon_fill": "#1a1a3a",
@@ -61,8 +85,17 @@
           "images/products/muay-thai-azul-espalda.jpg"
         ]
       },
-      "colors": ["#1a1a8a", "#4444aa", "#2222cc"],
-      "sizes": ["S", "M", "L", "XL"],
+      "colors": [
+        "#1a1a8a",
+        "#4444aa",
+        "#2222cc"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
       "material": "Satin estándar, resistente",
       "description": "Short inspirado en la tradición Muay Thai tailandesa. Letras thai bordadas en hilo plateado sobre satin azul profundo. Un clásico que nunca pasa de moda.",
       "meta": "Bordado · Satin · S–XL",
@@ -78,8 +111,16 @@
       "badge": "Popular",
       "badge_class": "",
       "price": 27990,
-      "stock": 3,
-      "tags": ["bordado", "destacado"],
+      "stock": {
+        "S": 1,
+        "M": 1,
+        "L": 1,
+        "XL": 0
+      },
+      "tags": [
+        "bordado",
+        "destacado"
+      ],
       "images": {
         "placeholder_bg": "linear-gradient(145deg,#1a0d1a,#100810)",
         "icon_fill": "#5a1a7a",
@@ -92,8 +133,17 @@
           "images/products/leopardo-morado-espalda.jpg"
         ]
       },
-      "colors": ["#5a1a7a", "#8833aa", "#cc66ff"],
-      "sizes": ["S", "M", "L", "XL"],
+      "colors": [
+        "#5a1a7a",
+        "#8833aa",
+        "#cc66ff"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
       "material": "Satin Premium, corte exclusivo",
       "description": "Diseño atrevido con estampado de leopardo bordado en tonos morado y lila. Uno de los modelos más solicitados de Ocho Armas. Disponible en cantidades limitadas.",
       "meta": "Bordado · Satin · S–XL",
@@ -109,8 +159,15 @@
       "badge": "",
       "badge_class": "",
       "price": 32990,
-      "stock": 6,
-      "tags": ["bordado"],
+      "stock": {
+        "S": 2,
+        "M": 2,
+        "L": 1,
+        "XL": 1
+      },
+      "tags": [
+        "bordado"
+      ],
       "images": {
         "placeholder_bg": "linear-gradient(145deg,#0a0a0a,#141414)",
         "icon_fill": "#1a1a1a",
@@ -123,8 +180,17 @@
           "images/products/ocho-armas-negro-espalda.jpg"
         ]
       },
-      "colors": ["#111111", "#222222", "#f0c519"],
-      "sizes": ["S", "M", "L", "XL"],
+      "colors": [
+        "#111111",
+        "#222222",
+        "#f0c519"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
       "material": "Satin Premium negro, hilo dorado",
       "description": "El short que define la identidad de Ocho Armas. Negro profundo con el logo bordado en hilo dorado. Elegancia y poder en el ring.",
       "meta": "Bordado Dorado · Satin · S–XL",
@@ -140,8 +206,15 @@
       "badge": "Custom",
       "badge_class": "custom",
       "price": 39990,
-      "stock": 0,
-      "tags": ["custom"],
+      "stock": {
+        "S": 0,
+        "M": 0,
+        "L": 0,
+        "XL": 0
+      },
+      "tags": [
+        "custom"
+      ],
       "images": {
         "placeholder_bg": "linear-gradient(145deg,#1a1008,#100c04)",
         "icon_fill": "#cc3300",
@@ -154,8 +227,17 @@
           "images/products/vendetta-espalda.jpg"
         ]
       },
-      "colors": ["#cc3300", "#881100", "#ffaa44"],
-      "sizes": ["S", "M", "L", "XL"],
+      "colors": [
+        "#cc3300",
+        "#881100",
+        "#ffaa44"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
       "material": "Satin premium, personalizado",
       "description": "Short personalizado con diseño Vendetta único. Rojo fuego con detalles en naranja, bordado artesanal premium. Cada unidad es irrepetible.",
       "meta": "Personalizado · Bordado · S–XL",
@@ -171,8 +253,15 @@
       "badge": "Custom",
       "badge_class": "custom",
       "price": 37990,
-      "stock": 2,
-      "tags": ["custom"],
+      "stock": {
+        "S": 1,
+        "M": 1,
+        "L": 0,
+        "XL": 0
+      },
+      "tags": [
+        "custom"
+      ],
       "images": {
         "placeholder_bg": "linear-gradient(145deg,#101a10,#080e08)",
         "icon_fill": "#1a5a1a",
@@ -185,8 +274,17 @@
           "images/products/chelo-verde-espalda.jpg"
         ]
       },
-      "colors": ["#1a5a1a", "#2a8a2a", "#88ee88"],
-      "sizes": ["S", "M", "L", "XL"],
+      "colors": [
+        "#1a5a1a",
+        "#2a8a2a",
+        "#88ee88"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
       "material": "Satin premium, bordado artesanal",
       "description": "Verde selva con bordado artesanal premium. Diseño exclusivo pensado para destacar en el gym y en el ring. Personalizable con tu nombre o el de tu academia.",
       "meta": "Personalizado · Bordado · S–XL",

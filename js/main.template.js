@@ -16,7 +16,294 @@
    ============================================================ */
 
 /* ── 01. DATA — inyectado por build.py ── */
-/* __PRODUCTS_DATA__ */
+/* Auto-generado — datos desde products.json */
+const PRODUCTS = [
+  {
+    "id": 0,
+    "slug": "chillattai-rojo",
+    "active": true,
+    "name": "Chillattai Rojo",
+    "subtitle": "Satin Premium · Bordado Artesanal",
+    "tag": "Bordado Destacado",
+    "badge": "Destacado",
+    "badge_class": "",
+    "price": 29990,
+    "stock": {
+      "S": 2,
+      "M": 2,
+      "L": 2,
+      "XL": 2
+    },
+    "tags": [
+      "bordado",
+      "destacado"
+    ],
+    "images": {
+      "placeholder_bg": "linear-gradient(145deg,#1a0a0a,#0d0505)",
+      "icon_fill": "#c0272d",
+      "icon_top": "#8a0000",
+      "icon_stroke": "#ff6666",
+      "files": [
+        "images/products/chillattai-rojo-frente.jpg",
+        "images/products/chillattai-rojo-lado.jpg",
+        "images/products/chillattai-rojo-detalle.jpg",
+        "images/products/chillattai-rojo-espalda.jpg"
+      ]
+    },
+    "colors": [
+      "#c0272d",
+      "#8a0000",
+      "#ff4444"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "material": "Satin Premium de alta densidad",
+    "description": "Short de Muay Thai confeccionado en Satin Premium de alta densidad. Diseño bordado artesanalmente con inspiración en la cultura Chillattai. Corte amplio en caderas para máxima movilidad en patadas y clínch.",
+    "meta": "Bordado · Satin Premium · S–XL",
+    "wa_text": "Me%20interesa%20el%20short%20Chillattai%20Rojo"
+  },
+  {
+    "id": 1,
+    "slug": "muay-thai-azul",
+    "active": true,
+    "name": "มวยไทย Azul",
+    "subtitle": "Satin · Bordado Thai",
+    "tag": "Colección Clásica",
+    "badge": "",
+    "badge_class": "",
+    "price": 24990,
+    "stock": {
+      "S": 3,
+      "M": 3,
+      "L": 3,
+      "XL": 3
+    },
+    "tags": [
+      "bordado"
+    ],
+    "images": {
+      "placeholder_bg": "linear-gradient(145deg,#0a0a1a,#060610)",
+      "icon_fill": "#1a1a3a",
+      "icon_top": "#0a0a22",
+      "icon_stroke": "#4444aa",
+      "files": [
+        "images/products/muay-thai-azul-frente.jpg",
+        "images/products/muay-thai-azul-lado.jpg",
+        "images/products/muay-thai-azul-detalle.jpg",
+        "images/products/muay-thai-azul-espalda.jpg"
+      ]
+    },
+    "colors": [
+      "#1a1a8a",
+      "#4444aa",
+      "#2222cc"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "material": "Satin estándar, resistente",
+    "description": "Short inspirado en la tradición Muay Thai tailandesa. Letras thai bordadas en hilo plateado sobre satin azul profundo. Un clásico que nunca pasa de moda.",
+    "meta": "Bordado · Satin · S–XL",
+    "wa_text": "Me%20interesa%20el%20short%20Muay%20Thai%20Azul"
+  },
+  {
+    "id": 2,
+    "slug": "leopardo-morado",
+    "active": true,
+    "name": "Leopardo Morado",
+    "subtitle": "Satin · Bordado Exclusivo",
+    "tag": "Popular · Edición Limitada",
+    "badge": "Popular",
+    "badge_class": "",
+    "price": 27990,
+    "stock": {
+      "S": 1,
+      "M": 1,
+      "L": 1,
+      "XL": 0
+    },
+    "tags": [
+      "bordado",
+      "destacado"
+    ],
+    "images": {
+      "placeholder_bg": "linear-gradient(145deg,#1a0d1a,#100810)",
+      "icon_fill": "#5a1a7a",
+      "icon_top": "#3a0a5a",
+      "icon_stroke": "#cc66ff",
+      "files": [
+        "images/products/leopardo-morado-frente.jpg",
+        "images/products/leopardo-morado-lado.jpg",
+        "images/products/leopardo-morado-detalle.jpg",
+        "images/products/leopardo-morado-espalda.jpg"
+      ]
+    },
+    "colors": [
+      "#5a1a7a",
+      "#8833aa",
+      "#cc66ff"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "material": "Satin Premium, corte exclusivo",
+    "description": "Diseño atrevido con estampado de leopardo bordado en tonos morado y lila. Uno de los modelos más solicitados de Ocho Armas. Disponible en cantidades limitadas.",
+    "meta": "Bordado · Satin · S–XL",
+    "wa_text": "Me%20interesa%20el%20short%20Leopardo%20Morado"
+  },
+  {
+    "id": 3,
+    "slug": "ocho-armas-negro",
+    "active": true,
+    "name": "Ocho Armas Negro",
+    "subtitle": "Satin · Bordado Dorado",
+    "tag": "Colección Signature",
+    "badge": "",
+    "badge_class": "",
+    "price": 32990,
+    "stock": {
+      "S": 2,
+      "M": 2,
+      "L": 1,
+      "XL": 1
+    },
+    "tags": [
+      "bordado"
+    ],
+    "images": {
+      "placeholder_bg": "linear-gradient(145deg,#0a0a0a,#141414)",
+      "icon_fill": "#1a1a1a",
+      "icon_top": "#0a0a0a",
+      "icon_stroke": "#f0c519",
+      "files": [
+        "images/products/ocho-armas-negro-frente.jpg",
+        "images/products/ocho-armas-negro-lado.jpg",
+        "images/products/ocho-armas-negro-detalle.jpg",
+        "images/products/ocho-armas-negro-espalda.jpg"
+      ]
+    },
+    "colors": [
+      "#111111",
+      "#222222",
+      "#f0c519"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "material": "Satin Premium negro, hilo dorado",
+    "description": "El short que define la identidad de Ocho Armas. Negro profundo con el logo bordado en hilo dorado. Elegancia y poder en el ring.",
+    "meta": "Bordado Dorado · Satin · S–XL",
+    "wa_text": "Me%20interesa%20el%20short%20Ocho%20Armas%20Negro"
+  },
+  {
+    "id": 4,
+    "slug": "vendetta",
+    "active": true,
+    "name": "Vendetta",
+    "subtitle": "Custom · Diseño Personalizado",
+    "tag": "Modelo Custom",
+    "badge": "Custom",
+    "badge_class": "custom",
+    "price": 39990,
+    "stock": {
+      "S": 0,
+      "M": 0,
+      "L": 0,
+      "XL": 0
+    },
+    "tags": [
+      "custom"
+    ],
+    "images": {
+      "placeholder_bg": "linear-gradient(145deg,#1a1008,#100c04)",
+      "icon_fill": "#cc3300",
+      "icon_top": "#881100",
+      "icon_stroke": "#ffaa44",
+      "files": [
+        "images/products/vendetta-frente.jpg",
+        "images/products/vendetta-lado.jpg",
+        "images/products/vendetta-detalle.jpg",
+        "images/products/vendetta-espalda.jpg"
+      ]
+    },
+    "colors": [
+      "#cc3300",
+      "#881100",
+      "#ffaa44"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "material": "Satin premium, personalizado",
+    "description": "Short personalizado con diseño Vendetta único. Rojo fuego con detalles en naranja, bordado artesanal premium. Cada unidad es irrepetible.",
+    "meta": "Personalizado · Bordado · S–XL",
+    "wa_text": "Me%20interesa%20el%20short%20Vendetta"
+  },
+  {
+    "id": 5,
+    "slug": "chelo-verde",
+    "active": true,
+    "name": "Chelo Verde",
+    "subtitle": "Custom · Bordado Premium",
+    "tag": "Modelo Custom",
+    "badge": "Custom",
+    "badge_class": "custom",
+    "price": 37990,
+    "stock": {
+      "S": 1,
+      "M": 1,
+      "L": 0,
+      "XL": 0
+    },
+    "tags": [
+      "custom"
+    ],
+    "images": {
+      "placeholder_bg": "linear-gradient(145deg,#101a10,#080e08)",
+      "icon_fill": "#1a5a1a",
+      "icon_top": "#0a3a0a",
+      "icon_stroke": "#88ee88",
+      "files": [
+        "images/products/chelo-verde-frente.jpg",
+        "images/products/chelo-verde-lado.jpg",
+        "images/products/chelo-verde-detalle.jpg",
+        "images/products/chelo-verde-espalda.jpg"
+      ]
+    },
+    "colors": [
+      "#1a5a1a",
+      "#2a8a2a",
+      "#88ee88"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "material": "Satin premium, bordado artesanal",
+    "description": "Verde selva con bordado artesanal premium. Diseño exclusivo pensado para destacar en el gym y en el ring. Personalizable con tu nombre o el de tu academia.",
+    "meta": "Personalizado · Bordado · S–XL",
+    "wa_text": "Me%20interesa%20el%20short%20Chelo%20Verde"
+  }
+];
+const SITE_META = {"currency": "CLP", "whatsapp": "56900000000", "instagram": "ochoarmas", "last_updated": "2026-03-08"};
 
 
 /* ── 02. HELPERS ── */
@@ -102,13 +389,20 @@ function waUrl(p) {
  * @param {string}  detailCall  - función JS a llamar al click en "Ver detalle"
  */
 function renderCard(p, featured, detailCall) {
-  var featClass = featured ? ' featured' : '';
-  var tags      = Array.isArray(p.tags) ? p.tags.join(' ') : (p.tags || '');
+  var featClass  = featured ? ' featured' : '';
+  var tags       = Array.isArray(p.tags) ? p.tags.join(' ') : (p.tags || '');
+
+  // Stock total calculado desde objeto por talla
+  var stockObj   = (typeof p.stock === 'object' && p.stock !== null) ? p.stock : {};
+  var totalStock = typeof p.stock === 'number'
+    ? p.stock
+    : Object.values(stockObj).reduce(function(s,n){ return s+(n||0); }, 0);
+
   var stockBadge = '';
-  if (p.stock === 0) {
+  if (totalStock === 0) {
     stockBadge = '<span class="product-badge" style="background:#333;color:#888;border:1px solid #444;top:44px;">Agotado</span>';
-  } else if (p.stock <= 2 && p.stock > 0) {
-    stockBadge = '<span class="product-badge" style="background:transparent;border:1px solid var(--red);color:var(--red);top:44px;">\u00daLTIMAS ' + p.stock + '</span>';
+  } else if (totalStock <= 3) {
+    stockBadge = '<span class="product-badge" style="background:transparent;border:1px solid var(--red);color:var(--red);top:44px;">\u00daLTIMAS ' + totalStock + '</span>';
   }
 
   return '<div class="product-card' + featClass + ' reveal" data-tags="' + tags + '">'
@@ -160,27 +454,46 @@ function showProduct(idx) {
     badgeHTML(p.badge, p.badge_class);
 
   // Imagen principal
-  var bigIconEl = document.getElementById('detail-big-icon');
+  var mainImgWrap = document.querySelector('.detail-main-img');
+  var placeholder  = document.getElementById('detail-main-placeholder');
+  var bigIconEl    = document.getElementById('detail-big-icon');
+
+  // Garantizar que .detail-main-img tenga posición relativa
+  mainImgWrap.style.position = 'relative';
+
+  // Obtener o crear el <img> con estilos críticos inline garantizados
+  var realImg = document.getElementById('detail-real-img');
+  if (!realImg) {
+    realImg = document.createElement('img');
+    realImg.id = 'detail-real-img';
+    mainImgWrap.appendChild(realImg);
+  }
+  // Estilos inline como garantía (el CSS también los define, doble seguro)
+  realImg.style.cssText = [
+    'display:block',
+    'position:absolute',
+    'top:0', 'left:0',
+    'width:100%', 'height:100%',
+    'object-fit:cover',
+    'object-position:center top',
+    'opacity:1',
+    'transition:opacity .25s ease'
+  ].join(';');
+
   if (files.length > 0) {
-    // Imagen real: ocultar SVG, mostrar img
-    bigIconEl.style.display = 'none';
-    var existing = document.getElementById('detail-real-img');
-    if (!existing) {
-      var img = document.createElement('img');
-      img.id = 'detail-real-img';
-      img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;';
-      bigIconEl.parentNode.appendChild(img);
-    }
-    document.getElementById('detail-real-img').src = files[0];
+    realImg.src   = files[0];
+    realImg.alt   = p.name;
+    realImg.style.display = 'block';
+    if (placeholder) placeholder.style.display = 'none';
   } else {
-    // Placeholder SVG
-    bigIconEl.style.display = '';
-    var ri = document.getElementById('detail-real-img');
-    if (ri) ri.src = '';
-    bigIconEl.innerHTML =
-      '<rect x="10" y="20" width="60" height="50" rx="4" fill="' + (imgs.icon_fill||'#444') + '" opacity=".5"/>'
-      + '<rect x="10" y="20" width="60" height="14" rx="4" fill="' + (imgs.icon_top||'#222') + '" opacity=".8"/>'
-      + '<line x1="40" y1="34" x2="40" y2="70" stroke="' + (imgs.icon_stroke||'#888') + '" stroke-width="2" opacity=".5"/>';
+    realImg.style.display = 'none';
+    if (placeholder) placeholder.style.display = '';
+    if (bigIconEl) {
+      bigIconEl.innerHTML =
+        '<rect x="10" y="20" width="60" height="50" rx="4" fill="' + (imgs.icon_fill||'#444') + '" opacity=".5"/>'
+        + '<rect x="10" y="20" width="60" height="14" rx="4" fill="' + (imgs.icon_top||'#222') + '" opacity=".8"/>'
+        + '<line x1="40" y1="34" x2="40" y2="70" stroke="' + (imgs.icon_stroke||'#888') + '" stroke-width="2" opacity=".5"/>';
+    }
   }
 
   // Miniaturas
@@ -207,33 +520,70 @@ function showProduct(idx) {
     priceEl.textContent = p.price ? formatPrice(p.price) : 'Consultar';
   }
 
-  // Stock
-  var stockNote = document.querySelector('.detail-price-note');
-  if (stockNote) {
-    if (p.stock === 0) {
-      stockNote.innerHTML = '<span style="color:var(--red)">Agotado</span>';
-    } else if (p.stock <= 2) {
-      stockNote.innerHTML = '<span style="color:var(--yellow)">\u00daltimas ' + p.stock + ' unidades</span>';
-    } else {
-      stockNote.textContent = 'Disponible · Vía WhatsApp';
-    }
+  // Stock por talla — calcular totales
+  var stockObj   = (typeof p.stock === 'object' && p.stock !== null) ? p.stock : {};
+  var totalStock = Object.values(stockObj).reduce(function(s, n) { return s + (n||0); }, 0);
+  var allSizes   = p.sizes || [];
+  var allOut     = totalStock === 0;
+  var hasLow     = !allOut && allSizes.some(function(sz) {
+    var s = stockObj[sz] || 0; return s > 0 && s <= 2;
+  });
+
+  // Aviso general de stock (encima del CTA)
+  var waBtn = document.getElementById('detail-wa-btn');
+  var noticeEl = document.getElementById('detail-stock-notice');
+  if (!noticeEl) {
+    noticeEl = document.createElement('div');
+    noticeEl.id = 'detail-stock-notice';
+    waBtn.parentNode.insertBefore(noticeEl, waBtn.parentNode.firstChild);
+  }
+  if (allOut) {
+    noticeEl.className = 'stock-notice agotado';
+    noticeEl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Agotado — Sin stock disponible en ninguna talla';
+    waBtn.classList.add('disabled');
+  } else if (hasLow) {
+    noticeEl.className = 'stock-notice bajo';
+    noticeEl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Últimas unidades disponibles';
+    waBtn.classList.remove('disabled');
+  } else {
+    noticeEl.className = '';
+    noticeEl.innerHTML = '';
+    waBtn.classList.remove('disabled');
   }
 
-  // Tallas
+  // Nota de precio (debajo del precio)
+  var stockNote = document.querySelector('.detail-price-note');
+  if (stockNote) {
+    stockNote.textContent = allOut ? '' : 'Disponible · Vía WhatsApp';
+  }
+
+  // Tallas con estado por stock individual
   var sizeSel = document.querySelector('.size-selector');
-  if (sizeSel && Array.isArray(p.sizes)) {
-    sizeSel.innerHTML = p.sizes.map(function(sz, i) {
-      return '<button class="size-opt ' + (i === 0 ? 'active' : '') + '" onclick="selectSize(this)">' + sz + '</button>';
+  if (sizeSel && allSizes.length) {
+    // Primera talla con stock para seleccionar por defecto
+    var firstAvail = allSizes.find(function(sz) { return (stockObj[sz] || 0) > 0; });
+    sizeSel.innerHTML = allSizes.map(function(sz) {
+      var s   = stockObj[sz] || 0;
+      var out = s === 0;
+      var low = !out && s <= 2;
+      var cls = '';
+      if (out) cls = 'out-of-stock';
+      else if (sz === firstAvail) cls = 'active';
+      if (low) cls += ' low-stock';
+      var click = out ? '' : 'onclick="selectSize(this)"';
+      var title = out ? 'title="Agotado"' : (low ? 'title="Últimas ' + s + ' unidades"' : '');
+      return '<button class="size-opt ' + cls + '" ' + click + ' ' + title + ' data-stock="' + s + '">' + sz + '</button>';
     }).join('');
   }
 
-  // Colores
-  document.getElementById('detail-colors').innerHTML = (p.colors || []).map(function(c, i) {
-    return '<div class="color-opt ' + (i === 0 ? 'active' : '') + '" style="background:' + c + '" onclick="selectColor(this)" title="' + c + '"></div>';
-  }).join('');
-
-  // Botón WhatsApp
-  document.getElementById('detail-wa-btn').href = waUrl(p);
+  // Botón WhatsApp — incluir talla seleccionada en el mensaje
+  var baseWa = waUrl(p);
+  waBtn.href = allOut ? '#' : baseWa;
+  waBtn.onclick = allOut ? function(e){ e.preventDefault(); } : function() {
+    var active = document.querySelector('.size-selector .size-opt.active');
+    var sz = active ? active.textContent.trim() : '';
+    waBtn.href = baseWa + (sz ? '%20Talla%20' + sz : '');
+  };
 
   // Productos relacionados
   var related = PRODUCTS.filter(function(r) { return r.id !== idx && r.active !== false; }).slice(0, 3);
@@ -241,7 +591,7 @@ function showProduct(idx) {
     return '<div class="product-card" style="cursor:pointer" onclick="showProduct(' + r.id + ')">'
       + '<div class="product-img-wrap">' + renderProductImage(r) + '</div>'
       + '<div class="product-overlay">'
-      + '<button class="overlay-btn" onclick="event.stopPropagation();window.open(\'' + waUrl(r) + '\',\'_blank\')">' + WA_ICON + ' Ver en WhatsApp</button>'
+      + '<button class="overlay-detail-btn" onclick="showProduct(' + r.id + ')">Ver detalle →</button>'
       + '</div>'
       + badgeHTML(r.badge, r.badge_class)
       + '<div class="product-info">'
@@ -258,25 +608,30 @@ function selectThumb(el, imgIdx, productIdx) {
   document.querySelectorAll('.detail-thumb').forEach(function(t) { t.classList.remove('active'); });
   el.classList.add('active');
 
-  // Cambiar imagen principal si hay imágenes reales
   var p = PRODUCTS[productIdx];
   if (!p) return;
   var files = (p.images || {}).files || [];
-  if (files.length > imgIdx) {
-    var ri = document.getElementById('detail-real-img');
-    if (ri) ri.src = files[imgIdx];
+  var realImg = document.getElementById('detail-real-img');
+
+  if (files.length > imgIdx && realImg) {
+    realImg.style.opacity = '0';
+    realImg.style.transition = 'opacity .25s ease';
+    realImg.src = files[imgIdx];
+    realImg.onload = function() {
+      realImg.style.opacity = '1';
+    };
   }
 }
 
 function selectSize(el) {
+  if (el.classList.contains('out-of-stock')) return;
   document.querySelectorAll('.size-opt').forEach(function(s) { s.classList.remove('active'); });
   el.classList.add('active');
+  // Actualizar href del botón WA con la talla seleccionada
+  var waBtn = document.getElementById('detail-wa-btn');
+  if (waBtn && waBtn.onclick) waBtn.onclick();
 }
 
-function selectColor(el) {
-  document.querySelectorAll('.color-opt').forEach(function(c) { c.classList.remove('active'); });
-  el.classList.add('active');
-}
 
 
 /* ── 05. CATALOG ── */

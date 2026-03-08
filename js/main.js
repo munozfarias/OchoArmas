@@ -16,7 +16,7 @@
    ============================================================ */
 
 /* ── 01. DATA — inyectado por build.py ── */
-/* Auto-generado por build.py — 2026-03-08 00:20:19 */
+/* Auto-generado — datos desde products.json */
 const PRODUCTS = [
   {
     "id": 0,
@@ -28,7 +28,12 @@ const PRODUCTS = [
     "badge": "Destacado",
     "badge_class": "",
     "price": 29990,
-    "stock": 8,
+    "stock": {
+      "S": 2,
+      "M": 2,
+      "L": 2,
+      "XL": 2
+    },
     "tags": [
       "bordado",
       "destacado"
@@ -71,7 +76,12 @@ const PRODUCTS = [
     "badge": "",
     "badge_class": "",
     "price": 24990,
-    "stock": 12,
+    "stock": {
+      "S": 3,
+      "M": 3,
+      "L": 3,
+      "XL": 3
+    },
     "tags": [
       "bordado"
     ],
@@ -113,7 +123,12 @@ const PRODUCTS = [
     "badge": "Popular",
     "badge_class": "",
     "price": 27990,
-    "stock": 3,
+    "stock": {
+      "S": 1,
+      "M": 1,
+      "L": 1,
+      "XL": 0
+    },
     "tags": [
       "bordado",
       "destacado"
@@ -156,7 +171,12 @@ const PRODUCTS = [
     "badge": "",
     "badge_class": "",
     "price": 32990,
-    "stock": 6,
+    "stock": {
+      "S": 2,
+      "M": 2,
+      "L": 1,
+      "XL": 1
+    },
     "tags": [
       "bordado"
     ],
@@ -198,7 +218,12 @@ const PRODUCTS = [
     "badge": "Custom",
     "badge_class": "custom",
     "price": 39990,
-    "stock": 0,
+    "stock": {
+      "S": 0,
+      "M": 0,
+      "L": 0,
+      "XL": 0
+    },
     "tags": [
       "custom"
     ],
@@ -240,7 +265,12 @@ const PRODUCTS = [
     "badge": "Custom",
     "badge_class": "custom",
     "price": 37990,
-    "stock": 2,
+    "stock": {
+      "S": 1,
+      "M": 1,
+      "L": 0,
+      "XL": 0
+    },
     "tags": [
       "custom"
     ],
@@ -359,13 +389,20 @@ function waUrl(p) {
  * @param {string}  detailCall  - función JS a llamar al click en "Ver detalle"
  */
 function renderCard(p, featured, detailCall) {
-  var featClass = featured ? ' featured' : '';
-  var tags      = Array.isArray(p.tags) ? p.tags.join(' ') : (p.tags || '');
+  var featClass  = featured ? ' featured' : '';
+  var tags       = Array.isArray(p.tags) ? p.tags.join(' ') : (p.tags || '');
+
+  // Stock total calculado desde objeto por talla
+  var stockObj   = (typeof p.stock === 'object' && p.stock !== null) ? p.stock : {};
+  var totalStock = typeof p.stock === 'number'
+    ? p.stock
+    : Object.values(stockObj).reduce(function(s,n){ return s+(n||0); }, 0);
+
   var stockBadge = '';
-  if (p.stock === 0) {
+  if (totalStock === 0) {
     stockBadge = '<span class="product-badge" style="background:#333;color:#888;border:1px solid #444;top:44px;">Agotado</span>';
-  } else if (p.stock <= 2 && p.stock > 0) {
-    stockBadge = '<span class="product-badge" style="background:transparent;border:1px solid var(--red);color:var(--red);top:44px;">\u00daLTIMAS ' + p.stock + '</span>';
+  } else if (totalStock <= 3) {
+    stockBadge = '<span class="product-badge" style="background:transparent;border:1px solid var(--red);color:var(--red);top:44px;">\u00daLTIMAS ' + totalStock + '</span>';
   }
 
   return '<div class="product-card' + featClass + ' reveal" data-tags="' + tags + '">'
@@ -483,28 +520,70 @@ function showProduct(idx) {
     priceEl.textContent = p.price ? formatPrice(p.price) : 'Consultar';
   }
 
-  // Stock
-  var stockNote = document.querySelector('.detail-price-note');
-  if (stockNote) {
-    if (p.stock === 0) {
-      stockNote.innerHTML = '<span style="color:var(--red)">Agotado</span>';
-    } else if (p.stock <= 2) {
-      stockNote.innerHTML = '<span style="color:var(--yellow)">\u00daltimas ' + p.stock + ' unidades</span>';
-    } else {
-      stockNote.textContent = 'Disponible · Vía WhatsApp';
-    }
+  // Stock por talla — calcular totales
+  var stockObj   = (typeof p.stock === 'object' && p.stock !== null) ? p.stock : {};
+  var totalStock = Object.values(stockObj).reduce(function(s, n) { return s + (n||0); }, 0);
+  var allSizes   = p.sizes || [];
+  var allOut     = totalStock === 0;
+  var hasLow     = !allOut && allSizes.some(function(sz) {
+    var s = stockObj[sz] || 0; return s > 0 && s <= 2;
+  });
+
+  // Aviso general de stock (encima del CTA)
+  var waBtn = document.getElementById('detail-wa-btn');
+  var noticeEl = document.getElementById('detail-stock-notice');
+  if (!noticeEl) {
+    noticeEl = document.createElement('div');
+    noticeEl.id = 'detail-stock-notice';
+    waBtn.parentNode.insertBefore(noticeEl, waBtn.parentNode.firstChild);
+  }
+  if (allOut) {
+    noticeEl.className = 'stock-notice agotado';
+    noticeEl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Agotado — Sin stock disponible en ninguna talla';
+    waBtn.classList.add('disabled');
+  } else if (hasLow) {
+    noticeEl.className = 'stock-notice bajo';
+    noticeEl.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Últimas unidades disponibles';
+    waBtn.classList.remove('disabled');
+  } else {
+    noticeEl.className = '';
+    noticeEl.innerHTML = '';
+    waBtn.classList.remove('disabled');
   }
 
-  // Tallas
+  // Nota de precio (debajo del precio)
+  var stockNote = document.querySelector('.detail-price-note');
+  if (stockNote) {
+    stockNote.textContent = allOut ? '' : 'Disponible · Vía WhatsApp';
+  }
+
+  // Tallas con estado por stock individual
   var sizeSel = document.querySelector('.size-selector');
-  if (sizeSel && Array.isArray(p.sizes)) {
-    sizeSel.innerHTML = p.sizes.map(function(sz, i) {
-      return '<button class="size-opt ' + (i === 0 ? 'active' : '') + '" onclick="selectSize(this)">' + sz + '</button>';
+  if (sizeSel && allSizes.length) {
+    // Primera talla con stock para seleccionar por defecto
+    var firstAvail = allSizes.find(function(sz) { return (stockObj[sz] || 0) > 0; });
+    sizeSel.innerHTML = allSizes.map(function(sz) {
+      var s   = stockObj[sz] || 0;
+      var out = s === 0;
+      var low = !out && s <= 2;
+      var cls = '';
+      if (out) cls = 'out-of-stock';
+      else if (sz === firstAvail) cls = 'active';
+      if (low) cls += ' low-stock';
+      var click = out ? '' : 'onclick="selectSize(this)"';
+      var title = out ? 'title="Agotado"' : (low ? 'title="Últimas ' + s + ' unidades"' : '');
+      return '<button class="size-opt ' + cls + '" ' + click + ' ' + title + ' data-stock="' + s + '">' + sz + '</button>';
     }).join('');
   }
 
-  // Botón WhatsApp
-  document.getElementById('detail-wa-btn').href = waUrl(p);
+  // Botón WhatsApp — incluir talla seleccionada en el mensaje
+  var baseWa = waUrl(p);
+  waBtn.href = allOut ? '#' : baseWa;
+  waBtn.onclick = allOut ? function(e){ e.preventDefault(); } : function() {
+    var active = document.querySelector('.size-selector .size-opt.active');
+    var sz = active ? active.textContent.trim() : '';
+    waBtn.href = baseWa + (sz ? '%20Talla%20' + sz : '');
+  };
 
   // Productos relacionados
   var related = PRODUCTS.filter(function(r) { return r.id !== idx && r.active !== false; }).slice(0, 3);
@@ -545,8 +624,12 @@ function selectThumb(el, imgIdx, productIdx) {
 }
 
 function selectSize(el) {
+  if (el.classList.contains('out-of-stock')) return;
   document.querySelectorAll('.size-opt').forEach(function(s) { s.classList.remove('active'); });
   el.classList.add('active');
+  // Actualizar href del botón WA con la talla seleccionada
+  var waBtn = document.getElementById('detail-wa-btn');
+  if (waBtn && waBtn.onclick) waBtn.onclick();
 }
 
 

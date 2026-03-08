@@ -499,8 +499,8 @@ td { padding:10px 14px; vertical-align:middle; }
             <input class="form-input" id="f-price" type="number" min="0" step="100" placeholder="29990">
           </div>
           <div class="form-group">
-            <label class="form-label">Stock</label>
-            <input class="form-input" id="f-stock" type="number" min="0" step="1" placeholder="8">
+            <label class="form-label">Stock por talla</label>
+            <div id="f-stock-sizes" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:2px"></div>
           </div>
           <div class="form-group">
             <label class="form-label">Estado</label>
@@ -652,12 +652,18 @@ function renderAll() {
   renderTable(DATA.products);
 }
 
+function getStockTotal(p) {
+  if (typeof p.stock === 'object' && p.stock !== null)
+    return Object.values(p.stock).reduce((s,n) => s+(n||0), 0);
+  return typeof p.stock === 'number' ? p.stock : 0;
+}
+
 function renderStats() {
-  const prods   = DATA.products;
-  const active  = prods.filter(p => p.active !== false);
-  const totalStock = active.reduce((s,p) => s + (p.stock||0), 0);
-  const outOfStock = active.filter(p => p.stock === 0).length;
-  const lowStock   = active.filter(p => p.stock > 0 && p.stock <= 2).length;
+  const prods      = DATA.products;
+  const active     = prods.filter(p => p.active !== false);
+  const totalStock = active.reduce((s,p) => s + getStockTotal(p), 0);
+  const outOfStock = active.filter(p => getStockTotal(p) === 0).length;
+  const lowStock   = active.filter(p => { const t=getStockTotal(p); return t>0 && t<=3; }).length;
 
   document.getElementById('stats-bar').innerHTML = `
     <div class="stat-card">
@@ -670,13 +676,33 @@ function renderStats() {
     </div>
     <div class="stat-card">
       <div class="stat-val" style="color:var(--yellow)">${lowStock}</div>
-      <div class="stat-label">Stock bajo (≤2)</div>
+      <div class="stat-label">Stock bajo (≤3)</div>
     </div>
     <div class="stat-card red">
       <div class="stat-val">${outOfStock}</div>
       <div class="stat-label">Agotados</div>
     </div>
   `;
+}
+
+function renderStockBySize(p) {
+  const stock = (typeof p.stock === 'object' && p.stock) ? p.stock : {};
+  const sizes = p.sizes || Object.keys(stock);
+  if (!sizes.length) return '<span style="color:var(--gray)">—</span>';
+  return `<div style="display:flex;gap:4px;flex-wrap:wrap">` +
+    sizes.map(sz => {
+      const n = stock[sz] ?? 0;
+      const col = n === 0 ? 'var(--gray2)' : n <= 2 ? 'var(--yellow)' : '#4ade80';
+      const strike = n === 0 ? 'text-decoration:line-through;opacity:.4' : '';
+      return `<div style="display:flex;flex-direction:column;align-items:center;gap:1px">
+        <span style="font-family:'Barlow Condensed';font-size:10px;letter-spacing:1px;color:var(--gray)">${sz}</span>
+        <div style="display:flex;align-items:center;gap:2px">
+          <button onclick="changeStock(${p.id},'${sz}',-1)" style="width:16px;height:16px;background:var(--dark);border:1px solid var(--border);color:var(--gray);cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center;line-height:1">−</button>
+          <span style="font-family:'Barlow Condensed';font-size:14px;color:${col};min-width:18px;text-align:center;${strike}">${n}</span>
+          <button onclick="changeStock(${p.id},'${sz}',+1)" style="width:16px;height:16px;background:var(--dark);border:1px solid var(--border);color:var(--gray);cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center;line-height:1">+</button>
+        </div>
+      </div>`;
+    }).join('') + `</div>`;
 }
 
 function renderTable(products) {
@@ -691,7 +717,7 @@ function renderTable(products) {
       + `<div class="td-img-placeholder" style="display:none">👕</div>`
       : `<div class="td-img-placeholder">👕</div>`;
 
-    const stockClass = p.stock === 0 ? 'stock-out' : p.stock <= 2 ? 'stock-low' : 'stock-ok';
+    const total = getStockTotal(p);
     const stateBadge = p.active !== false
       ? '<span class="badge badge-active">Activo</span>'
       : '<span class="badge badge-inactive">Oculto</span>';
@@ -701,6 +727,7 @@ function renderTable(products) {
     ).join('');
 
     const price = p.price ? '$' + Number(p.price).toLocaleString('es-CL') : '—';
+    const totalCol = total === 0 ? 'var(--red)' : total <= 3 ? 'var(--yellow)' : '#4ade80';
 
     return `<tr data-id="${p.id}" data-name="${p.name.toLowerCase()}">
       <td>${img}</td>
@@ -710,10 +737,9 @@ function renderTable(products) {
       </td>
       <td><span class="price-val">${price}</span></td>
       <td>
-        <div class="stock-edit">
-          <button onclick="changeStock(${p.id}, -1)">−</button>
-          <span class="stock-num ${stockClass}">${p.stock ?? '—'}</span>
-          <button onclick="changeStock(${p.id}, +1)">+</button>
+        ${renderStockBySize(p)}
+        <div style="margin-top:5px;font-family:'Barlow Condensed';font-size:11px;letter-spacing:1px;color:${totalCol}">
+          TOTAL: ${total}
         </div>
       </td>
       <td>${stateBadge}</td>
@@ -774,10 +800,11 @@ function sortBy(col) {
 // ══════════════════════════════════════
 // STOCK RÁPIDO
 // ══════════════════════════════════════
-function changeStock(id, delta) {
+function changeStock(id, size, delta) {
   const p = DATA.products.find(x => x.id === id);
   if (!p) return;
-  p.stock = Math.max(0, (p.stock || 0) + delta);
+  if (typeof p.stock !== 'object' || p.stock === null) p.stock = {};
+  p.stock[size] = Math.max(0, (p.stock[size] || 0) + delta);
   save().then(() => renderAll());
 }
 
@@ -839,7 +866,7 @@ function closeDrawer(e) {
 
 function resetForm() {
   ['f-name','f-slug','f-subtitle','f-desc','f-tag','f-meta',
-   'f-price','f-stock','f-badge','f-material','f-wa',
+   'f-price','f-badge','f-material','f-wa',
    'f-img-bg','f-icon-fill','f-icon-stroke'].forEach(id => {
     const el = document.getElementById(id);
     if(el) el.value = '';
@@ -848,6 +875,7 @@ function resetForm() {
   setToggle('active', true);
   renderTagChips([]);
   renderSizes(['S','M','L','XL']);
+  renderStockInputs(['S','M','L','XL'], {});
   renderImgFiles(['','','','']);
 }
 
@@ -859,7 +887,6 @@ function fillForm(p) {
   document.getElementById('f-tag').value      = p.tag        || '';
   document.getElementById('f-meta').value     = p.meta       || '';
   document.getElementById('f-price').value    = p.price      || '';
-  document.getElementById('f-stock').value    = p.stock ?? '';
   document.getElementById('f-badge').value    = p.badge      || '';
   document.getElementById('f-badge-class').value = p.badge_class || '';
   document.getElementById('f-material').value = p.material   || '';
@@ -870,6 +897,7 @@ function fillForm(p) {
   setToggle('active', p.active !== false);
   renderTagChips(p.tags || []);
   renderSizes(p.sizes || ['S','M','L','XL'], p.sizes);
+  renderStockInputs(p.sizes || ['S','M','L','XL'], typeof p.stock === 'object' ? p.stock : {});
   renderImgFiles(p.images?.files || ['','','','']);
 }
 
@@ -929,6 +957,32 @@ function handleTagInput(e) {
 }
 function removeTag(i) { currentTags.splice(i,1); renderTagChips(currentTags); }
 
+// ── Stock por talla ──
+function renderStockInputs(sizes, stockObj) {
+  stockObj = stockObj || {};
+  const wrap = document.getElementById('f-stock-sizes');
+  if (!wrap) return;
+  wrap.innerHTML = sizes.map(sz => `
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+      <label style="font-family:'Barlow Condensed';font-size:10px;letter-spacing:1px;color:var(--gray);text-transform:uppercase">${sz}</label>
+      <input type="number" min="0" step="1"
+        id="f-stock-${sz}"
+        value="${stockObj[sz] ?? 0}"
+        style="width:56px;text-align:center;background:var(--card);border:1px solid var(--border);color:var(--white);padding:7px 4px;font-family:'Barlow Condensed';font-size:15px;outline:none"
+        onfocus="this.style.borderColor='var(--yellow)'"
+        onblur="this.style.borderColor='var(--border)'">
+    </div>`).join('');
+}
+
+function getStockInputValues(sizes) {
+  const result = {};
+  sizes.forEach(sz => {
+    const el = document.getElementById('f-stock-' + sz);
+    result[sz] = el ? (parseInt(el.value) || 0) : 0;
+  });
+  return result;
+}
+
 // ── Tallas ──
 function renderSizes(allSizes, activeSizes) {
   const wrap = document.getElementById('sizes-wrap');
@@ -937,7 +991,15 @@ function renderSizes(allSizes, activeSizes) {
     opt.classList.toggle('active', active);
   });
 }
-function toggleSize(el) { el.classList.toggle('active'); }
+function toggleSize(el) {
+  el.classList.toggle('active');
+  // Re-renderizar inputs de stock con las tallas activas
+  const sizes = getSelectedSizes();
+  const current = getStockInputValues(
+    [...document.querySelectorAll('#sizes-wrap .toggle-opt')].map(e => e.dataset.size)
+  );
+  renderStockInputs(sizes, current);
+}
 function getSelectedSizes() {
   return [...document.querySelectorAll('#sizes-wrap .toggle-opt.active')]
     .map(el => el.dataset.size);
@@ -987,8 +1049,8 @@ function saveProduct() {
     badge:       document.getElementById('f-badge').value.trim(),
     badge_class: document.getElementById('f-badge-class').value,
     price:       Number(document.getElementById('f-price').value) || 0,
-    stock:       Number(document.getElementById('f-stock').value) || 0,
-    tags:        [...currentTags],
+    sizes:       getSelectedSizes(),
+    stock:       getStockInputValues(getSelectedSizes()),
     images: {
       placeholder_bg: document.getElementById('f-img-bg').value.trim() || 'linear-gradient(145deg,#1a1a1a,#111)',
       icon_fill:      document.getElementById('f-icon-fill').value.trim() || '#444',
@@ -996,7 +1058,6 @@ function saveProduct() {
       icon_stroke:    document.getElementById('f-icon-stroke').value.trim() || '#888',
       files:          getImgFiles(),
     },
-    sizes:       getSelectedSizes(),
     material:    document.getElementById('f-material').value.trim(),
     description: document.getElementById('f-desc').value.trim(),
     meta:        document.getElementById('f-meta').value.trim(),
