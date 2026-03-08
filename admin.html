@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OCHO ARMAS — Panel Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black:  #080808;
+  --dark:   #111;
+  --card:   #161616;
+  --border: #222;
+  --yellow: #f0c519;
+  --red:    #c0272d;
+  --green:  #2a9d4a;
+  --white:  #f5f0e8;
+  --gray:   #666;
+  --gray2:  #333;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { font-size:14px; }
+body {
+  background:var(--black); color:var(--white);
+  font-family:'Barlow', sans-serif; font-weight:300;
+  min-height:100vh;
+}
+
+/* ── LAYOUT ── */
+.admin-layout { display:flex; min-height:100vh; }
+
+.sidebar {
+  width:220px; flex-shrink:0;
+  background:var(--dark);
+  border-right:1px solid var(--border);
+  display:flex; flex-direction:column;
+  position:sticky; top:0; height:100vh;
+}
+.sidebar-logo {
+  padding:24px 20px 20px;
+  border-bottom:1px solid var(--border);
+}
+.sidebar-logo .brand { font-family:'Bebas Neue'; font-size:22px; letter-spacing:2px; color:var(--yellow); }
+.sidebar-logo .sub   { font-size:10px; letter-spacing:3px; color:var(--gray); text-transform:uppercase; margin-top:2px; }
+
+.sidebar-nav { flex:1; padding:12px 0; }
+.nav-item {
+  display:flex; align-items:center; gap:10px;
+  padding:10px 20px; cursor:pointer;
+  font-family:'Barlow Condensed'; font-size:13px; letter-spacing:1px;
+  text-transform:uppercase; color:var(--gray);
+  border-left:2px solid transparent;
+  transition:all .15s;
+}
+.nav-item:hover { color:var(--white); background:rgba(255,255,255,.03); }
+.nav-item.active { color:var(--yellow); border-left-color:var(--yellow); background:rgba(240,197,25,.05); }
+.nav-item svg { width:16px; height:16px; flex-shrink:0; }
+
+.sidebar-footer {
+  padding:16px 20px;
+  border-top:1px solid var(--border);
+  font-size:11px; color:var(--gray);
+}
+
+.main { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+
+/* ── TOPBAR ── */
+.topbar {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 32px; height:60px;
+  border-bottom:1px solid var(--border);
+  background:var(--dark); flex-shrink:0;
+}
+.topbar-title { font-family:'Bebas Neue'; font-size:20px; letter-spacing:2px; }
+.topbar-actions { display:flex; gap:10px; align-items:center; }
+
+/* ── CONTENT ── */
+.content { flex:1; overflow-y:auto; padding:28px 32px; }
+
+/* ── VIEWS ── */
+.view { display:none; }
+.view.active { display:block; }
+
+/* ── STATS BAR ── */
+.stats-bar {
+  display:grid; grid-template-columns:repeat(4,1fr); gap:12px;
+  margin-bottom:28px;
+}
+.stat-card {
+  background:var(--card); border:1px solid var(--border);
+  padding:16px 20px; border-radius:2px;
+}
+.stat-val { font-family:'Bebas Neue'; font-size:32px; color:var(--yellow); }
+.stat-label { font-size:11px; letter-spacing:2px; color:var(--gray); text-transform:uppercase; margin-top:2px; }
+.stat-card.red   .stat-val { color:var(--red); }
+.stat-card.green .stat-val { color:#4ade80; }
+
+/* ── TABLE ── */
+.table-header {
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:16px;
+}
+.table-header h2 { font-family:'Bebas Neue'; font-size:20px; letter-spacing:2px; }
+.search-input {
+  background:var(--card); border:1px solid var(--border);
+  color:var(--white); padding:8px 14px; font-family:'Barlow'; font-size:13px;
+  width:220px; outline:none;
+  transition:border-color .15s;
+}
+.search-input:focus { border-color:var(--yellow); }
+.search-input::placeholder { color:var(--gray); }
+
+table {
+  width:100%; border-collapse:collapse;
+  background:var(--card); border:1px solid var(--border);
+}
+thead th {
+  text-align:left; padding:10px 14px;
+  font-family:'Barlow Condensed'; font-size:11px; letter-spacing:2px;
+  text-transform:uppercase; color:var(--gray);
+  border-bottom:1px solid var(--border);
+  white-space:nowrap; cursor:pointer;
+  user-select:none;
+}
+thead th:hover { color:var(--white); }
+thead th.sort-asc::after  { content:' ↑'; color:var(--yellow); }
+thead th.sort-desc::after { content:' ↓'; color:var(--yellow); }
+
+tbody tr { border-bottom:1px solid var(--border); transition:background .1s; }
+tbody tr:last-child { border-bottom:none; }
+tbody tr:hover { background:rgba(255,255,255,.025); }
+td { padding:10px 14px; vertical-align:middle; }
+
+.td-img { width:48px; height:48px; object-fit:cover; display:block; background:var(--dark); }
+.td-img-placeholder {
+  width:48px; height:48px;
+  background:var(--dark); border:1px solid var(--border);
+  display:flex; align-items:center; justify-content:center;
+  font-size:18px;
+}
+.td-name { font-family:'Barlow Condensed'; font-size:15px; font-weight:600; }
+.td-sub  { font-size:11px; color:var(--gray); margin-top:2px; }
+
+.badge {
+  display:inline-block; padding:2px 8px;
+  font-family:'Barlow Condensed'; font-size:11px; letter-spacing:1px;
+  text-transform:uppercase;
+}
+.badge-active   { background:rgba(42,157,74,.15); color:#4ade80; border:1px solid rgba(42,157,74,.3); }
+.badge-inactive { background:rgba(255,255,255,.05); color:var(--gray); border:1px solid var(--border); }
+.badge-low      { background:rgba(240,197,25,.1); color:var(--yellow); border:1px solid rgba(240,197,25,.3); }
+.badge-out      { background:rgba(192,39,45,.1); color:var(--red); border:1px solid rgba(192,39,45,.3); }
+
+.stock-ok  { color:#4ade80; font-weight:500; }
+.stock-low { color:var(--yellow); font-weight:500; }
+.stock-out { color:var(--red); font-weight:500; }
+
+.price-val { font-family:'Barlow Condensed'; font-size:15px; }
+
+.row-actions { display:flex; gap:6px; }
+.btn-icon {
+  width:30px; height:30px; border:1px solid var(--border);
+  background:transparent; color:var(--gray); cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:all .15s;
+}
+.btn-icon:hover         { color:var(--white); border-color:var(--gray); }
+.btn-icon.edit:hover    { color:var(--yellow); border-color:var(--yellow); }
+.btn-icon.delete:hover  { color:var(--red); border-color:var(--red); }
+.btn-icon.toggle:hover  { color:#4ade80; border-color:#4ade80; }
+.btn-icon svg { width:14px; height:14px; }
+
+/* ── BOTONES PRINCIPALES ── */
+.btn {
+  padding:9px 20px; cursor:pointer; font-family:'Barlow Condensed';
+  font-size:13px; letter-spacing:1.5px; text-transform:uppercase;
+  border:none; transition:all .15s; display:inline-flex; align-items:center; gap:8px;
+}
+.btn-yellow { background:var(--yellow); color:var(--black); }
+.btn-yellow:hover { background:#d4a800; }
+.btn-ghost  { background:transparent; color:var(--white); border:1px solid var(--border); }
+.btn-ghost:hover { border-color:var(--gray); }
+.btn-red    { background:var(--red); color:var(--white); }
+.btn-red:hover { background:#a01f24; }
+.btn-green  { background:var(--green); color:var(--white); }
+.btn-green:hover { background:#22843c; }
+.btn svg { width:16px; height:16px; }
+
+/* ── MODAL / DRAWER ── */
+.overlay {
+  position:fixed; inset:0; background:rgba(0,0,0,.7);
+  z-index:100; display:none; align-items:flex-start; justify-content:flex-end;
+}
+.overlay.open { display:flex; }
+
+.drawer {
+  width:560px; height:100vh; background:var(--dark);
+  border-left:1px solid var(--border);
+  display:flex; flex-direction:column;
+  animation:slideIn .2s ease;
+  overflow:hidden;
+}
+@keyframes slideIn { from { transform:translateX(40px); opacity:0; } to { transform:none; opacity:1; } }
+
+.drawer-header {
+  padding:20px 24px; border-bottom:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between; flex-shrink:0;
+}
+.drawer-title { font-family:'Bebas Neue'; font-size:20px; letter-spacing:2px; }
+.drawer-close {
+  width:32px; height:32px; background:none; border:1px solid var(--border);
+  color:var(--gray); cursor:pointer; font-size:18px; display:flex;
+  align-items:center; justify-content:center; transition:all .15s;
+}
+.drawer-close:hover { color:var(--white); border-color:var(--gray); }
+
+.drawer-body { flex:1; overflow-y:auto; padding:24px; }
+.drawer-footer {
+  padding:16px 24px; border-top:1px solid var(--border);
+  display:flex; gap:10px; justify-content:flex-end; flex-shrink:0;
+}
+
+/* ── FORMULARIO ── */
+.form-section { margin-bottom:24px; }
+.form-section-title {
+  font-family:'Barlow Condensed'; font-size:11px; letter-spacing:3px;
+  text-transform:uppercase; color:var(--yellow);
+  border-bottom:1px solid var(--border); padding-bottom:8px; margin-bottom:16px;
+}
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; }
+.form-row.full { grid-template-columns:1fr; }
+.form-row.three { grid-template-columns:1fr 1fr 1fr; }
+
+.form-group { display:flex; flex-direction:column; gap:6px; }
+.form-label {
+  font-family:'Barlow Condensed'; font-size:11px; letter-spacing:1.5px;
+  text-transform:uppercase; color:var(--gray);
+}
+.form-input, .form-textarea, .form-select {
+  background:var(--card); border:1px solid var(--border);
+  color:var(--white); padding:9px 12px;
+  font-family:'Barlow'; font-size:13px; outline:none;
+  transition:border-color .15s; width:100%;
+}
+.form-input:focus, .form-textarea:focus, .form-select:focus { border-color:var(--yellow); }
+.form-input::placeholder, .form-textarea::placeholder { color:var(--gray2); }
+.form-textarea { resize:vertical; min-height:80px; }
+.form-select option { background:var(--card); }
+
+.toggle-group { display:flex; gap:8px; }
+.toggle-opt {
+  flex:1; padding:8px; text-align:center; cursor:pointer;
+  border:1px solid var(--border); font-family:'Barlow Condensed';
+  font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--gray);
+  transition:all .15s;
+}
+.toggle-opt.active      { border-color:var(--yellow); color:var(--yellow); background:rgba(240,197,25,.08); }
+.toggle-opt.active.red  { border-color:var(--red); color:var(--red); background:rgba(192,39,45,.08); }
+
+.color-inputs { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+.color-chip-wrap { position:relative; }
+.color-chip-wrap input[type=color] {
+  width:36px; height:36px; padding:2px; cursor:pointer;
+  border:1px solid var(--border); background:var(--card);
+}
+.color-chip-remove {
+  position:absolute; top:-5px; right:-5px; width:14px; height:14px;
+  background:var(--red); color:#fff; border:none; cursor:pointer;
+  font-size:9px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+}
+.add-color-btn {
+  width:36px; height:36px; background:var(--card); border:1px dashed var(--border);
+  color:var(--gray); cursor:pointer; font-size:20px; display:flex;
+  align-items:center; justify-content:center; transition:all .15s;
+}
+.add-color-btn:hover { border-color:var(--yellow); color:var(--yellow); }
+
+.tags-input-wrap { display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+.tag-chip {
+  display:flex; align-items:center; gap:4px;
+  background:rgba(240,197,25,.1); border:1px solid rgba(240,197,25,.3);
+  color:var(--yellow); padding:3px 10px;
+  font-family:'Barlow Condensed'; font-size:12px; letter-spacing:1px;
+}
+.tag-chip button {
+  background:none; border:none; color:var(--yellow); cursor:pointer; font-size:14px;
+  line-height:1; padding:0; opacity:.6;
+}
+.tag-chip button:hover { opacity:1; }
+.tag-add-input {
+  background:var(--card); border:1px dashed var(--border);
+  color:var(--white); padding:3px 10px;
+  font-family:'Barlow Condensed'; font-size:12px; outline:none; width:90px;
+}
+.tag-add-input:focus { border-color:var(--yellow); }
+
+/* ── CONFIRM MODAL ── */
+.confirm-modal {
+  position:fixed; inset:0; background:rgba(0,0,0,.8);
+  z-index:200; display:none; align-items:center; justify-content:center;
+}
+.confirm-modal.open { display:flex; }
+.confirm-box {
+  background:var(--dark); border:1px solid var(--border);
+  padding:28px 32px; width:360px;
+  animation:slideIn .15s ease;
+}
+.confirm-box h3 { font-family:'Bebas Neue'; font-size:20px; letter-spacing:2px; margin-bottom:10px; }
+.confirm-box p  { color:var(--gray); font-size:13px; margin-bottom:24px; line-height:1.5; }
+.confirm-actions { display:flex; gap:10px; justify-content:flex-end; }
+
+/* ── TOAST ── */
+.toast {
+  position:fixed; bottom:24px; right:24px; z-index:300;
+  background:var(--card); border:1px solid var(--border);
+  padding:12px 20px; font-family:'Barlow Condensed'; font-size:13px; letter-spacing:1px;
+  display:flex; align-items:center; gap:10px;
+  transform:translateY(20px); opacity:0;
+  transition:all .25s ease; pointer-events:none;
+}
+.toast.show { transform:none; opacity:1; }
+.toast.ok  { border-left:3px solid #4ade80; }
+.toast.err { border-left:3px solid var(--red); }
+.toast-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.toast.ok  .toast-dot { background:#4ade80; }
+.toast.err .toast-dot { background:var(--red); }
+
+/* ── STOCK INLINE EDIT ── */
+.stock-edit {
+  display:flex; align-items:center; gap:6px;
+}
+.stock-edit button {
+  width:22px; height:22px; background:var(--dark); border:1px solid var(--border);
+  color:var(--white); cursor:pointer; font-size:14px; display:flex;
+  align-items:center; justify-content:center; transition:all .1s;
+}
+.stock-edit button:hover { border-color:var(--yellow); color:var(--yellow); }
+.stock-num {
+  min-width:28px; text-align:center;
+  font-family:'Barlow Condensed'; font-size:15px;
+}
+
+/* ── SETTINGS VIEW ── */
+.settings-card {
+  background:var(--card); border:1px solid var(--border);
+  padding:24px; margin-bottom:16px; max-width:520px;
+}
+.settings-card h3 {
+  font-family:'Bebas Neue'; font-size:18px; letter-spacing:2px;
+  margin-bottom:16px; color:var(--yellow);
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width:4px; }
+::-webkit-scrollbar-track { background:var(--dark); }
+::-webkit-scrollbar-thumb { background:var(--border); }
+::-webkit-scrollbar-thumb:hover { background:var(--gray2); }
+</style>
+</head>
+<body>
+
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="brand">OCHO ARMAS</div>
+      <div class="sub">Panel Admin</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-item active" onclick="showView('inventory')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        Inventario
+      </div>
+      <div class="nav-item" onclick="showView('settings')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        Configuración
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="index.html" target="_blank" style="color:var(--gray);text-decoration:none;font-size:11px;letter-spacing:1px;">
+        ↗ Ver tienda
+      </a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div class="topbar-title" id="topbar-title">Inventario</div>
+      <div class="topbar-actions">
+        <span id="save-status" style="font-size:11px;color:var(--gray);letter-spacing:1px;"></span>
+        <button class="btn btn-yellow" onclick="openDrawer()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Nuevo Producto
+        </button>
+      </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content">
+
+      <!-- VIEW: INVENTARIO -->
+      <div class="view active" id="view-inventory">
+
+        <!-- Stats -->
+        <div class="stats-bar" id="stats-bar"></div>
+
+        <!-- Tabla -->
+        <div class="table-header">
+          <h2>Productos</h2>
+          <input class="search-input" type="text" placeholder="Buscar por nombre..."
+                 oninput="filterTable(this.value)" id="search-input">
+        </div>
+
+        <table id="products-table">
+          <thead>
+            <tr>
+              <th style="width:60px"></th>
+              <th onclick="sortBy('name')">Producto</th>
+              <th onclick="sortBy('price')">Precio</th>
+              <th onclick="sortBy('stock')">Stock</th>
+              <th onclick="sortBy('active')">Estado</th>
+              <th>Tags</th>
+              <th style="width:110px">Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="table-body"></tbody>
+        </table>
+      </div>
+
+      <!-- VIEW: CONFIGURACIÓN -->
+      <div class="view" id="view-settings">
+        <h2 style="font-family:'Bebas Neue';font-size:24px;letter-spacing:2px;margin-bottom:24px;">Configuración</h2>
+        <div class="settings-card">
+          <h3>Datos de contacto</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">WhatsApp (sin +)</label>
+              <input class="form-input" id="cfg-whatsapp" placeholder="56912345678">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Instagram</label>
+              <input class="form-input" id="cfg-instagram" placeholder="ochoarmas">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Moneda</label>
+              <select class="form-select" id="cfg-currency">
+                <option value="CLP">CLP — Peso chileno</option>
+                <option value="USD">USD — Dólar</option>
+                <option value="EUR">EUR — Euro</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn btn-yellow" style="margin-top:8px" onclick="saveSettings()">Guardar configuración</button>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </main>
+</div>
+
+<!-- DRAWER: FORMULARIO PRODUCTO -->
+<div class="overlay" id="overlay" onclick="closeDrawer(event)">
+  <div class="drawer" id="drawer">
+    <div class="drawer-header">
+      <div class="drawer-title" id="drawer-title">Nuevo Producto</div>
+      <button class="drawer-close" onclick="closeDrawer()">✕</button>
+    </div>
+    <div class="drawer-body">
+
+      <div class="form-section">
+        <div class="form-section-title">Información básica</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Nombre *</label>
+            <input class="form-input" id="f-name" placeholder="Chillattai Rojo">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Slug (URL) *</label>
+            <input class="form-input" id="f-slug" placeholder="chillattai-rojo">
+          </div>
+        </div>
+        <div class="form-row full">
+          <div class="form-group">
+            <label class="form-label">Subtítulo</label>
+            <input class="form-input" id="f-subtitle" placeholder="Satin Premium · Bordado Artesanal">
+          </div>
+        </div>
+        <div class="form-row full">
+          <div class="form-group">
+            <label class="form-label">Descripción</label>
+            <textarea class="form-textarea" id="f-desc" placeholder="Descripción completa del producto..."></textarea>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Tag (etiqueta detalle)</label>
+            <input class="form-input" id="f-tag" placeholder="Bordado Destacado">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Texto meta (bajo nombre en card)</label>
+            <input class="form-input" id="f-meta" placeholder="Bordado · Satin · S–XL">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">Precio, stock y estado</div>
+        <div class="form-row three">
+          <div class="form-group">
+            <label class="form-label">Precio (CLP)</label>
+            <input class="form-input" id="f-price" type="number" min="0" step="100" placeholder="29990">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Stock</label>
+            <input class="form-input" id="f-stock" type="number" min="0" step="1" placeholder="8">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Estado</label>
+            <div class="toggle-group">
+              <div class="toggle-opt active" id="toggle-active" onclick="setToggle('active',true)">Activo</div>
+              <div class="toggle-opt red"    id="toggle-inactive" onclick="setToggle('active',false)">Oculto</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">Badge</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Texto badge (vacío = sin badge)</label>
+            <input class="form-input" id="f-badge" placeholder="Destacado">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Estilo badge</label>
+            <select class="form-select" id="f-badge-class">
+              <option value="">Normal (borde rojo)</option>
+              <option value="custom">Custom (borde amarillo)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">Tags de catálogo</div>
+        <div class="form-group">
+          <label class="form-label">Tags (Enter o coma para agregar)</label>
+          <div class="tags-input-wrap" id="tags-wrap">
+            <input class="tag-add-input" id="tag-input" placeholder="bordado"
+                   onkeydown="handleTagInput(event)">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">Colores disponibles</div>
+        <div class="form-group">
+          <label class="form-label">Colores (haz clic para editar)</label>
+          <div class="color-inputs" id="colors-wrap">
+            <button class="add-color-btn" onclick="addColor()">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">Tallas disponibles</div>
+        <div class="form-group">
+          <label class="form-label">Selecciona tallas</label>
+          <div class="toggle-group" id="sizes-wrap">
+            <div class="toggle-opt" data-size="S"  onclick="toggleSize(this)">S</div>
+            <div class="toggle-opt" data-size="M"  onclick="toggleSize(this)">M</div>
+            <div class="toggle-opt" data-size="L"  onclick="toggleSize(this)">L</div>
+            <div class="toggle-opt" data-size="XL" onclick="toggleSize(this)">XL</div>
+            <div class="toggle-opt" data-size="XXL" onclick="toggleSize(this)">XXL</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">Detalles técnicos</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Material</label>
+            <input class="form-input" id="f-material" placeholder="Satin Premium de alta densidad">
+          </div>
+          <div class="form-group">
+            <label class="form-label">WhatsApp text (URL encoded)</label>
+            <input class="form-input" id="f-wa" placeholder="Me%20interesa%20el%20short%20...">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">Imágenes (rutas relativas)</div>
+        <div class="form-row full" id="img-files-wrap">
+          <!-- generado dinámicamente -->
+        </div>
+        <div class="form-row three">
+          <div class="form-group">
+            <label class="form-label">Color fondo placeholder</label>
+            <input class="form-input" id="f-img-bg" placeholder="linear-gradient(145deg,#1a0a0a,#0d0505)">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Color ícono fill</label>
+            <input class="form-input" id="f-icon-fill" placeholder="#c0272d">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Color ícono stroke</label>
+            <input class="form-input" id="f-icon-stroke" placeholder="#ff6666">
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /drawer-body -->
+    <div class="drawer-footer">
+      <button class="btn btn-ghost" onclick="closeDrawer()">Cancelar</button>
+      <button class="btn btn-yellow" onclick="saveProduct()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        Guardar
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRM MODAL -->
+<div class="confirm-modal" id="confirm-modal">
+  <div class="confirm-box">
+    <h3 id="confirm-title">Eliminar producto</h3>
+    <p id="confirm-msg">¿Estás seguro? Esta acción no se puede deshacer.</p>
+    <div class="confirm-actions">
+      <button class="btn btn-ghost" onclick="closeConfirm()">Cancelar</button>
+      <button class="btn btn-red" id="confirm-ok" onclick="confirmAction()">Eliminar</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <div class="toast-dot"></div>
+  <span id="toast-msg">Guardado</span>
+</div>
+
+<script>
+// ══════════════════════════════════════
+// ESTADO GLOBAL
+// ══════════════════════════════════════
+const API = 'http://localhost:8000/api/products';
+let DATA = { meta:{}, products:[] };
+let editingId = null;        // null = nuevo, number = editar
+let confirmCallback = null;
+let sortCol = null, sortDir = 1;
+
+// ══════════════════════════════════════
+// INIT
+// ══════════════════════════════════════
+async function init() {
+  try {
+    const r = await fetch(API);
+    if (!r.ok) throw new Error('No se pudo conectar al servidor');
+    DATA = await r.json();
+    renderAll();
+    loadSettings();
+  } catch(e) {
+    toast('No se pudo conectar. ¿Está corriendo admin-server.py?', 'err');
+    console.error(e);
+  }
+}
+
+// ══════════════════════════════════════
+// RENDER
+// ══════════════════════════════════════
+function renderAll() {
+  renderStats();
+  renderTable(DATA.products);
+}
+
+function renderStats() {
+  const prods   = DATA.products;
+  const active  = prods.filter(p => p.active !== false);
+  const totalStock = active.reduce((s,p) => s + (p.stock||0), 0);
+  const outOfStock = active.filter(p => p.stock === 0).length;
+  const lowStock   = active.filter(p => p.stock > 0 && p.stock <= 2).length;
+
+  document.getElementById('stats-bar').innerHTML = `
+    <div class="stat-card">
+      <div class="stat-val">${prods.length}</div>
+      <div class="stat-label">Total productos</div>
+    </div>
+    <div class="stat-card green">
+      <div class="stat-val">${totalStock}</div>
+      <div class="stat-label">Unidades en stock</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val" style="color:var(--yellow)">${lowStock}</div>
+      <div class="stat-label">Stock bajo (≤2)</div>
+    </div>
+    <div class="stat-card red">
+      <div class="stat-val">${outOfStock}</div>
+      <div class="stat-label">Agotados</div>
+    </div>
+  `;
+}
+
+function renderTable(products) {
+  const tbody = document.getElementById('table-body');
+  if (!products.length) {
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--gray)">Sin productos</td></tr>';
+    return;
+  }
+  tbody.innerHTML = products.map(p => {
+    const img = (p.images?.files?.[0])
+      ? `<img class="td-img" src="${p.images.files[0]}" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+      + `<div class="td-img-placeholder" style="display:none">👕</div>`
+      : `<div class="td-img-placeholder">👕</div>`;
+
+    const stockClass = p.stock === 0 ? 'stock-out' : p.stock <= 2 ? 'stock-low' : 'stock-ok';
+    const stateBadge = p.active !== false
+      ? '<span class="badge badge-active">Activo</span>'
+      : '<span class="badge badge-inactive">Oculto</span>';
+
+    const tags = (p.tags||[]).map(t =>
+      `<span class="badge" style="background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--gray);margin-right:3px">${t}</span>`
+    ).join('');
+
+    const price = p.price ? '$' + Number(p.price).toLocaleString('es-CL') : '—';
+
+    return `<tr data-id="${p.id}" data-name="${p.name.toLowerCase()}">
+      <td>${img}</td>
+      <td>
+        <div class="td-name">${p.name}</div>
+        <div class="td-sub">${p.slug}</div>
+      </td>
+      <td><span class="price-val">${price}</span></td>
+      <td>
+        <div class="stock-edit">
+          <button onclick="changeStock(${p.id}, -1)">−</button>
+          <span class="stock-num ${stockClass}">${p.stock ?? '—'}</span>
+          <button onclick="changeStock(${p.id}, +1)">+</button>
+        </div>
+      </td>
+      <td>${stateBadge}</td>
+      <td>${tags}</td>
+      <td>
+        <div class="row-actions">
+          <button class="btn-icon toggle" title="${p.active !== false ? 'Ocultar' : 'Activar'}" onclick="toggleActive(${p.id})">
+            ${p.active !== false
+              ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>'
+              : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>'
+            }
+          </button>
+          <button class="btn-icon edit" title="Editar" onclick="openDrawer(${p.id})">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </button>
+          <button class="btn-icon delete" title="Eliminar" onclick="askDelete(${p.id})">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+          </button>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+// ══════════════════════════════════════
+// ACCIONES DE TABLA
+// ══════════════════════════════════════
+function filterTable(q) {
+  const rows = document.querySelectorAll('#table-body tr[data-name]');
+  rows.forEach(r => {
+    r.style.display = r.dataset.name.includes(q.toLowerCase()) ? '' : 'none';
+  });
+}
+
+function sortBy(col) {
+  if (sortCol === col) sortDir *= -1;
+  else { sortCol = col; sortDir = 1; }
+
+  document.querySelectorAll('thead th').forEach(th => {
+    th.classList.remove('sort-asc','sort-desc');
+  });
+  const headers = ['','name','price','stock','active','tags',''];
+  const idx = headers.indexOf(col);
+  if (idx>=0) {
+    const ths = document.querySelectorAll('thead th');
+    ths[idx].classList.add(sortDir===1 ? 'sort-asc' : 'sort-desc');
+  }
+
+  const sorted = [...DATA.products].sort((a,b) => {
+    let va = a[col] ?? '', vb = b[col] ?? '';
+    if (typeof va === 'string') va = va.toLowerCase();
+    if (typeof vb === 'string') vb = vb.toLowerCase();
+    return va < vb ? -sortDir : va > vb ? sortDir : 0;
+  });
+  renderTable(sorted);
+}
+
+// ══════════════════════════════════════
+// STOCK RÁPIDO
+// ══════════════════════════════════════
+function changeStock(id, delta) {
+  const p = DATA.products.find(x => x.id === id);
+  if (!p) return;
+  p.stock = Math.max(0, (p.stock || 0) + delta);
+  save().then(() => renderAll());
+}
+
+// ══════════════════════════════════════
+// TOGGLE ACTIVO/OCULTO
+// ══════════════════════════════════════
+function toggleActive(id) {
+  const p = DATA.products.find(x => x.id === id);
+  if (!p) return;
+  p.active = !(p.active !== false);
+  save().then(() => renderAll());
+}
+
+// ══════════════════════════════════════
+// ELIMINAR
+// ══════════════════════════════════════
+function askDelete(id) {
+  const p = DATA.products.find(x => x.id === id);
+  document.getElementById('confirm-title').textContent = 'Eliminar producto';
+  document.getElementById('confirm-msg').textContent =
+    `¿Eliminar "${p?.name}"? Esta acción no se puede deshacer.`;
+  confirmCallback = () => {
+    DATA.products = DATA.products.filter(x => x.id !== id);
+    save().then(() => { renderAll(); toast('Producto eliminado'); });
+  };
+  document.getElementById('confirm-modal').classList.add('open');
+}
+
+function closeConfirm() {
+  document.getElementById('confirm-modal').classList.remove('open');
+  confirmCallback = null;
+}
+
+function confirmAction() {
+  closeConfirm();
+  if (confirmCallback) confirmCallback();
+}
+
+// ══════════════════════════════════════
+// DRAWER — FORMULARIO
+// ══════════════════════════════════════
+function openDrawer(id) {
+  editingId = (id !== undefined) ? id : null;
+  document.getElementById('drawer-title').textContent =
+    editingId !== null ? 'Editar Producto' : 'Nuevo Producto';
+
+  resetForm();
+  if (editingId !== null) {
+    const p = DATA.products.find(x => x.id === editingId);
+    if (p) fillForm(p);
+  }
+  document.getElementById('overlay').classList.add('open');
+}
+
+function closeDrawer(e) {
+  if (e && e.target !== document.getElementById('overlay')) return;
+  document.getElementById('overlay').classList.remove('open');
+}
+
+function resetForm() {
+  ['f-name','f-slug','f-subtitle','f-desc','f-tag','f-meta',
+   'f-price','f-stock','f-badge','f-material','f-wa',
+   'f-img-bg','f-icon-fill','f-icon-stroke'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.value = '';
+  });
+  document.getElementById('f-badge-class').value = '';
+  setToggle('active', true);
+  renderTagChips([]);
+  renderColors([]);
+  renderSizes(['S','M','L','XL']);
+  renderImgFiles(['','','','']);
+}
+
+function fillForm(p) {
+  document.getElementById('f-name').value     = p.name       || '';
+  document.getElementById('f-slug').value     = p.slug       || '';
+  document.getElementById('f-subtitle').value = p.subtitle   || '';
+  document.getElementById('f-desc').value     = p.description|| '';
+  document.getElementById('f-tag').value      = p.tag        || '';
+  document.getElementById('f-meta').value     = p.meta       || '';
+  document.getElementById('f-price').value    = p.price      || '';
+  document.getElementById('f-stock').value    = p.stock ?? '';
+  document.getElementById('f-badge').value    = p.badge      || '';
+  document.getElementById('f-badge-class').value = p.badge_class || '';
+  document.getElementById('f-material').value = p.material   || '';
+  document.getElementById('f-wa').value       = p.wa_text    || '';
+  document.getElementById('f-img-bg').value   = p.images?.placeholder_bg || '';
+  document.getElementById('f-icon-fill').value= p.images?.icon_fill || '';
+  document.getElementById('f-icon-stroke').value = p.images?.icon_stroke || '';
+  setToggle('active', p.active !== false);
+  renderTagChips(p.tags || []);
+  renderColors(p.colors || []);
+  renderSizes(p.sizes || ['S','M','L','XL'], p.sizes);
+  renderImgFiles(p.images?.files || ['','','','']);
+}
+
+// ── Auto-slug desde nombre ──
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('f-name').addEventListener('input', function() {
+    if (editingId !== null) return; // no sobreescribir al editar
+    document.getElementById('f-slug').value = this.value
+      .toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+      .replace(/[^a-z0-9]+/g,'-')
+      .replace(/^-|-$/g,'');
+    // Auto wa_text
+    document.getElementById('f-wa').value =
+      'Me%20interesa%20el%20short%20' + encodeURIComponent(this.value);
+  });
+});
+
+// ── Toggle activo/inactivo ──
+function setToggle(field, val) {
+  if (field === 'active') {
+    document.getElementById('toggle-active').classList.toggle('active', val);
+    document.getElementById('toggle-inactive').classList.toggle('active', !val);
+  }
+}
+function getToggle(field) {
+  if (field === 'active') {
+    return document.getElementById('toggle-active').classList.contains('active');
+  }
+}
+
+// ── Tags ──
+let currentTags = [];
+function renderTagChips(tags) {
+  currentTags = [...tags];
+  const wrap = document.getElementById('tags-wrap');
+  const input = document.getElementById('tag-input');
+  wrap.innerHTML = '';
+  currentTags.forEach((t,i) => {
+    const chip = document.createElement('div');
+    chip.className = 'tag-chip';
+    chip.innerHTML = `${t}<button onclick="removeTag(${i})">×</button>`;
+    wrap.appendChild(chip);
+  });
+  wrap.appendChild(input);
+}
+function handleTagInput(e) {
+  if (e.key === 'Enter' || e.key === ',') {
+    e.preventDefault();
+    const val = e.target.value.trim().replace(/,/g,'').toLowerCase();
+    if (val && !currentTags.includes(val)) {
+      currentTags.push(val);
+      renderTagChips(currentTags);
+    }
+    e.target.value = '';
+  }
+}
+function removeTag(i) { currentTags.splice(i,1); renderTagChips(currentTags); }
+
+// ── Colores ──
+let currentColors = [];
+function renderColors(colors) {
+  currentColors = [...colors];
+  const wrap = document.getElementById('colors-wrap');
+  wrap.innerHTML = currentColors.map((c,i) => `
+    <div class="color-chip-wrap">
+      <input type="color" value="${c}" oninput="currentColors[${i}]=this.value">
+      <button class="color-chip-remove" onclick="removeColor(${i})">×</button>
+    </div>`).join('') +
+    '<button class="add-color-btn" onclick="addColor()">+</button>';
+}
+function addColor() {
+  currentColors.push('#f0c519');
+  renderColors(currentColors);
+}
+function removeColor(i) { currentColors.splice(i,1); renderColors(currentColors); }
+
+// ── Tallas ──
+function renderSizes(allSizes, activeSizes) {
+  const wrap = document.getElementById('sizes-wrap');
+  wrap.querySelectorAll('.toggle-opt').forEach(opt => {
+    const active = !activeSizes || activeSizes.includes(opt.dataset.size);
+    opt.classList.toggle('active', active);
+  });
+}
+function toggleSize(el) { el.classList.toggle('active'); }
+function getSelectedSizes() {
+  return [...document.querySelectorAll('#sizes-wrap .toggle-opt.active')]
+    .map(el => el.dataset.size);
+}
+
+// ── Imágenes ──
+function renderImgFiles(files) {
+  const labels = ['Frente','Lado','Detalle','Espalda'];
+  document.getElementById('img-files-wrap').innerHTML =
+    `<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">` +
+    labels.map((l,i) => `
+      <div class="form-group">
+        <label class="form-label">Imagen ${l}</label>
+        <input class="form-input" id="f-img-${i}" value="${files[i]||''}"
+               placeholder="images/products/slug-${l.toLowerCase()}.jpg">
+      </div>`).join('') +
+    `</div>`;
+}
+function getImgFiles() {
+  return [0,1,2,3].map(i => {
+    const el = document.getElementById(`f-img-${i}`);
+    return el ? el.value.trim() : '';
+  }).filter(v => v);
+}
+
+// ══════════════════════════════════════
+// GUARDAR PRODUCTO
+// ══════════════════════════════════════
+function saveProduct() {
+  const name = document.getElementById('f-name').value.trim();
+  const slug = document.getElementById('f-slug').value.trim();
+  if (!name || !slug) { toast('Nombre y slug son obligatorios', 'err'); return; }
+
+  // Verificar slug único (excepto si estamos editando el mismo)
+  const slugExists = DATA.products.some(p =>
+    p.slug === slug && p.id !== editingId
+  );
+  if (slugExists) { toast('El slug ya existe en otro producto', 'err'); return; }
+
+  const product = {
+    id:          editingId !== null ? editingId : nextId(),
+    slug,
+    active:      getToggle('active'),
+    name,
+    subtitle:    document.getElementById('f-subtitle').value.trim(),
+    tag:         document.getElementById('f-tag').value.trim(),
+    badge:       document.getElementById('f-badge').value.trim(),
+    badge_class: document.getElementById('f-badge-class').value,
+    price:       Number(document.getElementById('f-price').value) || 0,
+    stock:       Number(document.getElementById('f-stock').value) || 0,
+    tags:        [...currentTags],
+    images: {
+      placeholder_bg: document.getElementById('f-img-bg').value.trim() || 'linear-gradient(145deg,#1a1a1a,#111)',
+      icon_fill:      document.getElementById('f-icon-fill').value.trim() || '#444',
+      icon_top:       document.getElementById('f-icon-fill').value.trim() || '#222',
+      icon_stroke:    document.getElementById('f-icon-stroke').value.trim() || '#888',
+      files:          getImgFiles(),
+    },
+    colors:      [...currentColors],
+    sizes:       getSelectedSizes(),
+    material:    document.getElementById('f-material').value.trim(),
+    description: document.getElementById('f-desc').value.trim(),
+    meta:        document.getElementById('f-meta').value.trim(),
+    wa_text:     document.getElementById('f-wa').value.trim(),
+  };
+
+  if (editingId !== null) {
+    const idx = DATA.products.findIndex(p => p.id === editingId);
+    DATA.products[idx] = product;
+  } else {
+    DATA.products.push(product);
+  }
+
+  save().then(() => {
+    closeDrawer();
+    renderAll();
+    toast(editingId !== null ? 'Producto actualizado' : 'Producto creado');
+  });
+}
+
+function nextId() {
+  return DATA.products.length
+    ? Math.max(...DATA.products.map(p => p.id)) + 1
+    : 0;
+}
+
+// ══════════════════════════════════════
+// SETTINGS
+// ══════════════════════════════════════
+function loadSettings() {
+  const m = DATA.meta || {};
+  document.getElementById('cfg-whatsapp').value  = m.whatsapp  || '';
+  document.getElementById('cfg-instagram').value = m.instagram || '';
+  document.getElementById('cfg-currency').value  = m.currency  || 'CLP';
+}
+
+function saveSettings() {
+  DATA.meta.whatsapp  = document.getElementById('cfg-whatsapp').value.trim();
+  DATA.meta.instagram = document.getElementById('cfg-instagram').value.trim();
+  DATA.meta.currency  = document.getElementById('cfg-currency').value;
+  save().then(() => toast('Configuración guardada'));
+}
+
+// ══════════════════════════════════════
+// API SAVE
+// ══════════════════════════════════════
+async function save() {
+  document.getElementById('save-status').textContent = 'Guardando...';
+  try {
+    const r = await fetch(API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(DATA)
+    });
+    if (!r.ok) throw new Error(await r.text());
+    document.getElementById('save-status').textContent = '✓ Guardado';
+    setTimeout(() => document.getElementById('save-status').textContent = '', 3000);
+  } catch(e) {
+    document.getElementById('save-status').textContent = '✗ Error al guardar';
+    toast('Error al guardar: ' + e.message, 'err');
+    throw e;
+  }
+}
+
+// ══════════════════════════════════════
+// UI HELPERS
+// ══════════════════════════════════════
+function showView(name) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('view-' + name).classList.add('active');
+  event.currentTarget.classList.add('active');
+  const titles = { inventory:'Inventario', settings:'Configuración' };
+  document.getElementById('topbar-title').textContent = titles[name] || name;
+  document.querySelector('.topbar-actions .btn-yellow').style.display =
+    name === 'inventory' ? '' : 'none';
+}
+
+let toastTimer;
+function toast(msg, type='ok') {
+  const el  = document.getElementById('toast');
+  const txt = document.getElementById('toast-msg');
+  el.className = `toast ${type}`;
+  txt.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 3000);
+}
+
+// ── Cerrar modales con Escape ──
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeDrawer();
+    closeConfirm();
+  }
+});
+
+init();
+</script>
+</body>
+</html>

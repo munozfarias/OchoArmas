@@ -417,27 +417,46 @@ function showProduct(idx) {
     badgeHTML(p.badge, p.badge_class);
 
   // Imagen principal
-  var bigIconEl = document.getElementById('detail-big-icon');
+  var mainImgWrap = document.querySelector('.detail-main-img');
+  var placeholder  = document.getElementById('detail-main-placeholder');
+  var bigIconEl    = document.getElementById('detail-big-icon');
+
+  // Garantizar que .detail-main-img tenga posición relativa
+  mainImgWrap.style.position = 'relative';
+
+  // Obtener o crear el <img> con estilos críticos inline garantizados
+  var realImg = document.getElementById('detail-real-img');
+  if (!realImg) {
+    realImg = document.createElement('img');
+    realImg.id = 'detail-real-img';
+    mainImgWrap.appendChild(realImg);
+  }
+  // Estilos inline como garantía (el CSS también los define, doble seguro)
+  realImg.style.cssText = [
+    'display:block',
+    'position:absolute',
+    'top:0', 'left:0',
+    'width:100%', 'height:100%',
+    'object-fit:cover',
+    'object-position:center top',
+    'opacity:1',
+    'transition:opacity .25s ease'
+  ].join(';');
+
   if (files.length > 0) {
-    // Imagen real: ocultar SVG, mostrar img
-    bigIconEl.style.display = 'none';
-    var existing = document.getElementById('detail-real-img');
-    if (!existing) {
-      var img = document.createElement('img');
-      img.id = 'detail-real-img';
-      img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;';
-      bigIconEl.parentNode.appendChild(img);
-    }
-    document.getElementById('detail-real-img').src = files[0];
+    realImg.src   = files[0];
+    realImg.alt   = p.name;
+    realImg.style.display = 'block';
+    if (placeholder) placeholder.style.display = 'none';
   } else {
-    // Placeholder SVG
-    bigIconEl.style.display = '';
-    var ri = document.getElementById('detail-real-img');
-    if (ri) ri.src = '';
-    bigIconEl.innerHTML =
-      '<rect x="10" y="20" width="60" height="50" rx="4" fill="' + (imgs.icon_fill||'#444') + '" opacity=".5"/>'
-      + '<rect x="10" y="20" width="60" height="14" rx="4" fill="' + (imgs.icon_top||'#222') + '" opacity=".8"/>'
-      + '<line x1="40" y1="34" x2="40" y2="70" stroke="' + (imgs.icon_stroke||'#888') + '" stroke-width="2" opacity=".5"/>';
+    realImg.style.display = 'none';
+    if (placeholder) placeholder.style.display = '';
+    if (bigIconEl) {
+      bigIconEl.innerHTML =
+        '<rect x="10" y="20" width="60" height="50" rx="4" fill="' + (imgs.icon_fill||'#444') + '" opacity=".5"/>'
+        + '<rect x="10" y="20" width="60" height="14" rx="4" fill="' + (imgs.icon_top||'#222') + '" opacity=".8"/>'
+        + '<line x1="40" y1="34" x2="40" y2="70" stroke="' + (imgs.icon_stroke||'#888') + '" stroke-width="2" opacity=".5"/>';
+    }
   }
 
   // Miniaturas
@@ -515,13 +534,18 @@ function selectThumb(el, imgIdx, productIdx) {
   document.querySelectorAll('.detail-thumb').forEach(function(t) { t.classList.remove('active'); });
   el.classList.add('active');
 
-  // Cambiar imagen principal si hay imágenes reales
   var p = PRODUCTS[productIdx];
   if (!p) return;
   var files = (p.images || {}).files || [];
-  if (files.length > imgIdx) {
-    var ri = document.getElementById('detail-real-img');
-    if (ri) ri.src = files[imgIdx];
+  var realImg = document.getElementById('detail-real-img');
+
+  if (files.length > imgIdx && realImg) {
+    realImg.style.opacity = '0';
+    realImg.style.transition = 'opacity .25s ease';
+    realImg.src = files[imgIdx];
+    realImg.onload = function() {
+      realImg.style.opacity = '1';
+    };
   }
 }
 

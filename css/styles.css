@@ -774,25 +774,46 @@
     height:calc(100vh - 88px);
     overflow:hidden;
     background:var(--card);
-    display:flex; align-items:center; justify-content:center;
-    flex-direction:column; gap:0;
+    display:flex;
+    flex-direction:column;
   }
 
+  /* Wrapper imagen principal — ocupa todo el espacio restante */
   .detail-main-img {
-    width:100%; flex:1;
-    display:flex; align-items:center; justify-content:center;
     position:relative;
+    width:100%;
+    flex:1 1 0;
+    min-height:0;
+    overflow:hidden;
+    background:var(--card);
   }
 
+  /* Imagen real — cubre todo el wrapper */
+  #detail-real-img {
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center top;
+    position:absolute;
+    top:0; left:0;
+    opacity:1;
+    transition:opacity .25s ease;
+  }
+
+  /* Placeholder — mismas dimensiones, se oculta con imagen real */
   .detail-placeholder {
+    position:absolute;
+    top:0; left:0;
     width:100%; height:100%;
     display:flex; align-items:center; justify-content:center;
     flex-direction:column; gap:16px;
-    position:relative;
+    z-index:1;
   }
 
   .detail-placeholder-bg {
     position:absolute; inset:0;
+    z-index:0;
   }
 
   .detail-placeholder-content {
@@ -802,7 +823,7 @@
   }
 
   .detail-placeholder-icon {
-    width:120px; height:120px; opacity:.2;
+    width:160px; height:160px; opacity:.25;
   }
 
   .detail-placeholder-text {
@@ -813,6 +834,7 @@
 
   .detail-badge-overlay {
     position:absolute; top:24px; left:24px;
+    z-index:10;
   }
 
   .detail-thumbnails {
@@ -820,9 +842,10 @@
     padding:12px; background:var(--dark);
     border-top:1px solid var(--border);
     width:100%;
+    flex-shrink:0; /* nunca se comprime */
   }
   .detail-thumb {
-    width:64px; height:64px;
+    width:72px; height:72px;
     background:var(--card);
     border:1px solid var(--border);
     cursor:pointer; overflow:hidden;
@@ -830,8 +853,10 @@
     flex-shrink:0;
     transition:border-color .2s;
   }
+  .detail-thumb:hover { border-color:var(--gray); }
   .detail-thumb.active { border-color:var(--yellow); }
   .detail-thumb svg { width:28px; height:28px; opacity:.3; }
+  .detail-thumb img { width:100%; height:100%; object-fit:cover; object-position:center top; }
 
   .detail-info {
     padding:56px 64px;
@@ -979,7 +1004,7 @@
     .tallas-inner { grid-template-columns:1fr; }
     .catalog-grid { grid-template-columns:repeat(2,1fr); }
     .detail-layout { grid-template-columns:1fr; }
-    .detail-gallery { position:relative; top:0; height:60vw; min-height:340px; }
+    .detail-gallery { position:relative; top:0; height:75vw; min-height:380px; max-height:560px; }
     .related-grid { grid-template-columns:repeat(2,1fr); }
   }
 
