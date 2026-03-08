@@ -503,11 +503,6 @@ function showProduct(idx) {
     }).join('');
   }
 
-  // Colores
-  document.getElementById('detail-colors').innerHTML = (p.colors || []).map(function(c, i) {
-    return '<div class="color-opt ' + (i === 0 ? 'active' : '') + '" style="background:' + c + '" onclick="selectColor(this)" title="' + c + '"></div>';
-  }).join('');
-
   // Botón WhatsApp
   document.getElementById('detail-wa-btn').href = waUrl(p);
 
@@ -517,7 +512,7 @@ function showProduct(idx) {
     return '<div class="product-card" style="cursor:pointer" onclick="showProduct(' + r.id + ')">'
       + '<div class="product-img-wrap">' + renderProductImage(r) + '</div>'
       + '<div class="product-overlay">'
-      + '<button class="overlay-btn" onclick="event.stopPropagation();window.open(\'' + waUrl(r) + '\',\'_blank\')">' + WA_ICON + ' Ver en WhatsApp</button>'
+      + '<button class="overlay-detail-btn" onclick="showProduct(' + r.id + ')">Ver detalle →</button>'
       + '</div>'
       + badgeHTML(r.badge, r.badge_class)
       + '<div class="product-info">'
@@ -554,10 +549,6 @@ function selectSize(el) {
   el.classList.add('active');
 }
 
-function selectColor(el) {
-  document.querySelectorAll('.color-opt').forEach(function(c) { c.classList.remove('active'); });
-  el.classList.add('active');
-}
 
 
 /* ── 05. CATALOG ── */

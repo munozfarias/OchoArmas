@@ -943,23 +943,6 @@
   .size-opt:hover { border-color:var(--yellow); color:var(--yellow); }
   .size-opt.active { border-color:var(--yellow); background:var(--yellow); color:var(--black); }
 
-  .color-selector {
-    display:flex; gap:10px; margin-bottom:40px;
-    flex-wrap:wrap;
-  }
-  .color-opt {
-    width:32px; height:32px;
-    border-radius:50%;
-    border:2px solid transparent;
-    cursor:pointer;
-    transition:all .2s;
-    position:relative;
-  }
-  .color-opt.active {
-    border-color:var(--yellow);
-    box-shadow:0 0 0 3px rgba(240,197,25,.3);
-  }
-
   .detail-cta-row {
     display:flex; gap:12px; flex-wrap:wrap;
     margin-bottom:40px;

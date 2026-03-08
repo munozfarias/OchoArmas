@@ -257,24 +257,6 @@ td { padding:10px 14px; vertical-align:middle; }
 .toggle-opt.active      { border-color:var(--yellow); color:var(--yellow); background:rgba(240,197,25,.08); }
 .toggle-opt.active.red  { border-color:var(--red); color:var(--red); background:rgba(192,39,45,.08); }
 
-.color-inputs { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
-.color-chip-wrap { position:relative; }
-.color-chip-wrap input[type=color] {
-  width:36px; height:36px; padding:2px; cursor:pointer;
-  border:1px solid var(--border); background:var(--card);
-}
-.color-chip-remove {
-  position:absolute; top:-5px; right:-5px; width:14px; height:14px;
-  background:var(--red); color:#fff; border:none; cursor:pointer;
-  font-size:9px; border-radius:50%; display:flex; align-items:center; justify-content:center;
-}
-.add-color-btn {
-  width:36px; height:36px; background:var(--card); border:1px dashed var(--border);
-  color:var(--gray); cursor:pointer; font-size:20px; display:flex;
-  align-items:center; justify-content:center; transition:all .15s;
-}
-.add-color-btn:hover { border-color:var(--yellow); color:var(--yellow); }
-
 .tags-input-wrap { display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
 .tag-chip {
   display:flex; align-items:center; gap:4px;
@@ -554,16 +536,6 @@ td { padding:10px 14px; vertical-align:middle; }
           <div class="tags-input-wrap" id="tags-wrap">
             <input class="tag-add-input" id="tag-input" placeholder="bordado"
                    onkeydown="handleTagInput(event)">
-          </div>
-        </div>
-      </div>
-
-      <div class="form-section">
-        <div class="form-section-title">Colores disponibles</div>
-        <div class="form-group">
-          <label class="form-label">Colores (haz clic para editar)</label>
-          <div class="color-inputs" id="colors-wrap">
-            <button class="add-color-btn" onclick="addColor()">+</button>
           </div>
         </div>
       </div>
@@ -875,7 +847,6 @@ function resetForm() {
   document.getElementById('f-badge-class').value = '';
   setToggle('active', true);
   renderTagChips([]);
-  renderColors([]);
   renderSizes(['S','M','L','XL']);
   renderImgFiles(['','','','']);
 }
@@ -898,7 +869,6 @@ function fillForm(p) {
   document.getElementById('f-icon-stroke').value = p.images?.icon_stroke || '';
   setToggle('active', p.active !== false);
   renderTagChips(p.tags || []);
-  renderColors(p.colors || []);
   renderSizes(p.sizes || ['S','M','L','XL'], p.sizes);
   renderImgFiles(p.images?.files || ['','','','']);
 }
@@ -958,24 +928,6 @@ function handleTagInput(e) {
   }
 }
 function removeTag(i) { currentTags.splice(i,1); renderTagChips(currentTags); }
-
-// ── Colores ──
-let currentColors = [];
-function renderColors(colors) {
-  currentColors = [...colors];
-  const wrap = document.getElementById('colors-wrap');
-  wrap.innerHTML = currentColors.map((c,i) => `
-    <div class="color-chip-wrap">
-      <input type="color" value="${c}" oninput="currentColors[${i}]=this.value">
-      <button class="color-chip-remove" onclick="removeColor(${i})">×</button>
-    </div>`).join('') +
-    '<button class="add-color-btn" onclick="addColor()">+</button>';
-}
-function addColor() {
-  currentColors.push('#f0c519');
-  renderColors(currentColors);
-}
-function removeColor(i) { currentColors.splice(i,1); renderColors(currentColors); }
 
 // ── Tallas ──
 function renderSizes(allSizes, activeSizes) {
@@ -1044,7 +996,6 @@ function saveProduct() {
       icon_stroke:    document.getElementById('f-icon-stroke').value.trim() || '#888',
       files:          getImgFiles(),
     },
-    colors:      [...currentColors],
     sizes:       getSelectedSizes(),
     material:    document.getElementById('f-material').value.trim(),
     description: document.getElementById('f-desc').value.trim(),
