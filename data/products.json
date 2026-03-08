@@ -1,0 +1,196 @@
+{
+  "meta": {
+    "currency": "CLP",
+    "whatsapp": "56900000000",
+    "instagram": "ochoarmas",
+    "last_updated": "2026-03-08"
+  },
+  "products": [
+    {
+      "id": 0,
+      "slug": "chillattai-rojo",
+      "active": true,
+      "name": "Chillattai Rojo",
+      "subtitle": "Satin Premium · Bordado Artesanal",
+      "tag": "Bordado Destacado",
+      "badge": "Destacado",
+      "badge_class": "",
+      "price": 29990,
+      "stock": 8,
+      "tags": ["bordado", "destacado"],
+      "images": {
+        "placeholder_bg": "linear-gradient(145deg,#1a0a0a,#0d0505)",
+        "icon_fill": "#c0272d",
+        "icon_top": "#8a0000",
+        "icon_stroke": "#ff6666",
+        "files": [
+          "images/products/chillattai-rojo-frente.jpg",
+          "images/products/chillattai-rojo-lado.jpg",
+          "images/products/chillattai-rojo-detalle.jpg",
+          "images/products/chillattai-rojo-espalda.jpg"
+        ]
+      },
+      "colors": ["#c0272d", "#8a0000", "#ff4444"],
+      "sizes": ["S", "M", "L", "XL"],
+      "material": "Satin Premium de alta densidad",
+      "description": "Short de Muay Thai confeccionado en Satin Premium de alta densidad. Diseño bordado artesanalmente con inspiración en la cultura Chillattai. Corte amplio en caderas para máxima movilidad en patadas y clínch.",
+      "meta": "Bordado · Satin Premium · S–XL",
+      "wa_text": "Me%20interesa%20el%20short%20Chillattai%20Rojo"
+    },
+    {
+      "id": 1,
+      "slug": "muay-thai-azul",
+      "active": true,
+      "name": "มวยไทย Azul",
+      "subtitle": "Satin · Bordado Thai",
+      "tag": "Colección Clásica",
+      "badge": "",
+      "badge_class": "",
+      "price": 24990,
+      "stock": 12,
+      "tags": ["bordado"],
+      "images": {
+        "placeholder_bg": "linear-gradient(145deg,#0a0a1a,#060610)",
+        "icon_fill": "#1a1a3a",
+        "icon_top": "#0a0a22",
+        "icon_stroke": "#4444aa",
+        "files": [
+          "images/products/muay-thai-azul-frente.jpg",
+          "images/products/muay-thai-azul-lado.jpg",
+          "images/products/muay-thai-azul-detalle.jpg",
+          "images/products/muay-thai-azul-espalda.jpg"
+        ]
+      },
+      "colors": ["#1a1a8a", "#4444aa", "#2222cc"],
+      "sizes": ["S", "M", "L", "XL"],
+      "material": "Satin estándar, resistente",
+      "description": "Short inspirado en la tradición Muay Thai tailandesa. Letras thai bordadas en hilo plateado sobre satin azul profundo. Un clásico que nunca pasa de moda.",
+      "meta": "Bordado · Satin · S–XL",
+      "wa_text": "Me%20interesa%20el%20short%20Muay%20Thai%20Azul"
+    },
+    {
+      "id": 2,
+      "slug": "leopardo-morado",
+      "active": true,
+      "name": "Leopardo Morado",
+      "subtitle": "Satin · Bordado Exclusivo",
+      "tag": "Popular · Edición Limitada",
+      "badge": "Popular",
+      "badge_class": "",
+      "price": 27990,
+      "stock": 3,
+      "tags": ["bordado", "destacado"],
+      "images": {
+        "placeholder_bg": "linear-gradient(145deg,#1a0d1a,#100810)",
+        "icon_fill": "#5a1a7a",
+        "icon_top": "#3a0a5a",
+        "icon_stroke": "#cc66ff",
+        "files": [
+          "images/products/leopardo-morado-frente.jpg",
+          "images/products/leopardo-morado-lado.jpg",
+          "images/products/leopardo-morado-detalle.jpg",
+          "images/products/leopardo-morado-espalda.jpg"
+        ]
+      },
+      "colors": ["#5a1a7a", "#8833aa", "#cc66ff"],
+      "sizes": ["S", "M", "L", "XL"],
+      "material": "Satin Premium, corte exclusivo",
+      "description": "Diseño atrevido con estampado de leopardo bordado en tonos morado y lila. Uno de los modelos más solicitados de Ocho Armas. Disponible en cantidades limitadas.",
+      "meta": "Bordado · Satin · S–XL",
+      "wa_text": "Me%20interesa%20el%20short%20Leopardo%20Morado"
+    },
+    {
+      "id": 3,
+      "slug": "ocho-armas-negro",
+      "active": true,
+      "name": "Ocho Armas Negro",
+      "subtitle": "Satin · Bordado Dorado",
+      "tag": "Colección Signature",
+      "badge": "",
+      "badge_class": "",
+      "price": 32990,
+      "stock": 6,
+      "tags": ["bordado"],
+      "images": {
+        "placeholder_bg": "linear-gradient(145deg,#0a0a0a,#141414)",
+        "icon_fill": "#1a1a1a",
+        "icon_top": "#0a0a0a",
+        "icon_stroke": "#f0c519",
+        "files": [
+          "images/products/ocho-armas-negro-frente.jpg",
+          "images/products/ocho-armas-negro-lado.jpg",
+          "images/products/ocho-armas-negro-detalle.jpg",
+          "images/products/ocho-armas-negro-espalda.jpg"
+        ]
+      },
+      "colors": ["#111111", "#222222", "#f0c519"],
+      "sizes": ["S", "M", "L", "XL"],
+      "material": "Satin Premium negro, hilo dorado",
+      "description": "El short que define la identidad de Ocho Armas. Negro profundo con el logo bordado en hilo dorado. Elegancia y poder en el ring.",
+      "meta": "Bordado Dorado · Satin · S–XL",
+      "wa_text": "Me%20interesa%20el%20short%20Ocho%20Armas%20Negro"
+    },
+    {
+      "id": 4,
+      "slug": "vendetta",
+      "active": true,
+      "name": "Vendetta",
+      "subtitle": "Custom · Diseño Personalizado",
+      "tag": "Modelo Custom",
+      "badge": "Custom",
+      "badge_class": "custom",
+      "price": 39990,
+      "stock": 0,
+      "tags": ["custom"],
+      "images": {
+        "placeholder_bg": "linear-gradient(145deg,#1a1008,#100c04)",
+        "icon_fill": "#cc3300",
+        "icon_top": "#881100",
+        "icon_stroke": "#ffaa44",
+        "files": [
+          "images/products/vendetta-frente.jpg",
+          "images/products/vendetta-lado.jpg",
+          "images/products/vendetta-detalle.jpg",
+          "images/products/vendetta-espalda.jpg"
+        ]
+      },
+      "colors": ["#cc3300", "#881100", "#ffaa44"],
+      "sizes": ["S", "M", "L", "XL"],
+      "material": "Satin premium, personalizado",
+      "description": "Short personalizado con diseño Vendetta único. Rojo fuego con detalles en naranja, bordado artesanal premium. Cada unidad es irrepetible.",
+      "meta": "Personalizado · Bordado · S–XL",
+      "wa_text": "Me%20interesa%20el%20short%20Vendetta"
+    },
+    {
+      "id": 5,
+      "slug": "chelo-verde",
+      "active": true,
+      "name": "Chelo Verde",
+      "subtitle": "Custom · Bordado Premium",
+      "tag": "Modelo Custom",
+      "badge": "Custom",
+      "badge_class": "custom",
+      "price": 37990,
+      "stock": 2,
+      "tags": ["custom"],
+      "images": {
+        "placeholder_bg": "linear-gradient(145deg,#101a10,#080e08)",
+        "icon_fill": "#1a5a1a",
+        "icon_top": "#0a3a0a",
+        "icon_stroke": "#88ee88",
+        "files": [
+          "images/products/chelo-verde-frente.jpg",
+          "images/products/chelo-verde-lado.jpg",
+          "images/products/chelo-verde-detalle.jpg",
+          "images/products/chelo-verde-espalda.jpg"
+        ]
+      },
+      "colors": ["#1a5a1a", "#2a8a2a", "#88ee88"],
+      "sizes": ["S", "M", "L", "XL"],
+      "material": "Satin premium, bordado artesanal",
+      "description": "Verde selva con bordado artesanal premium. Diseño exclusivo pensado para destacar en el gym y en el ring. Personalizable con tu nombre o el de tu academia.",
+      "meta": "Personalizado · Bordado · S–XL",
+      "wa_text": "Me%20interesa%20el%20short%20Chelo%20Verde"
+    }
+  ]
+}
